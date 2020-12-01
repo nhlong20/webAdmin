@@ -1,4 +1,5 @@
-<!DOCTYPE html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -42,7 +43,7 @@
         }
     </style>
     <!-- Custom styles for this template -->
-    <link href="dashboard.css" rel="stylesheet">
+    <link href="/stylesheets/dashboard.css" rel="stylesheet">
     <style type="text/css">
         /* Chart.js */
         @-webkit-keyframes chartjs-render-animation {
@@ -114,7 +115,6 @@
                     </ul>
                 </div>
             </nav>
-
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div class="chartjs-size-monitor"
                     style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
@@ -127,53 +127,7 @@
                         <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
                     </div>
                 </div>
-                <div
-                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Dashboard</h1>
-                </div>
-
-                <div class="d-flex justify-content-between mb-3">
-                    <h2>Product list</h2>
-                    <button type="button" class="btn btn-success">Add an item</button>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-striped table-sm" aria-describedby="Product list">
-                        <thead>
-                            <tr>
-                                <th id="id">ID</th>
-                                <th id="name">Name</th>
-                                <th id="collection">Collection</th>
-                                <th id="price">Price</th>
-                                <th id="discount">Discount</th>
-                                <th id="modify">Modify</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary m-1">Edit</button>
-                                    <button type="button" class="btn btn-danger m-1">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1,002</td>
-                                <td>amet</td>
-                                <td>consectetur</td>
-                                <td>adipiscing</td>
-                                <td>elit</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary m-1">Edit</button>
-                                    <button type="button" class="btn btn-danger m-1">Delete</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <%- body %>
             </main>
         </div>
     </div>
@@ -186,7 +140,7 @@
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-    <script src="dashboard.js"></script>
+    <script src="/javascripts/controller.js"></script>
 
     <div id="rememberry__extension__root" style="all: unset;"></div>
 </body>
