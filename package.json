@@ -15,11 +15,13 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "express-ejs-layouts": "^2.5.0",
+    "formidable": "^1.2.2",
     "http-errors": "~1.6.3",
     "method-override": "^3.0.0",
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.2",
     "morgan": "~1.9.1",
+    "path": "^0.12.7",
     "slugify": "^1.4.6",
     "validator": "^13.5.1"
   }
