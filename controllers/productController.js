@@ -4,9 +4,9 @@ const path = require('path');
 const formidable = require('formidable');
 var cloudinary = require('cloudinary').v2;
 cloudinary.config({
-    cloud_name: 'dh5xeom6f',
-    api_key: '962646653613759',
-    api_secret: 'hVXMvZLyssqThKpOunCUJhFyKJk'
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
 });
 exports.getAllProducts = async (req, res) => {
     const products = await Product.find({});
