@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Thêm sản phẩm mới</h1>
 </div>
-<form class="form-group mt-5" action="/add-to-db" method="POST">
+<form class="form-group mt-5" action="/add-to-db" method="POST" enctype="multipart/form-data">
     <label for="name">Tên sản phầm</label>
     <input type="text" id="name" name="product[name]" class="form-control" placeholder="" aria-describedby="helpId">
     <label for="brand">Tên thương hiệu</label>
@@ -17,9 +17,7 @@
         aria-describedby="helpId">
     <label for="size">Kích thước sản phẩm</label>
     <input type="text" id="size" name="product[size]" class="form-control" placeholder="" aria-describedby="helpId">
-    <label for="coverImageFileChooser">Ảnh bìa sản phẩm</label><br>
-    <input id="coverImageFileChooser" type='file' accept="image/jpeg, image/png" onchange="readURL(this);" /><br>
-    <img hidden id="coverImage" src="#" alt="product-cover-image" /><br>
+
     <label for="status">Ảnh sản phẩm</label><br>
     <input type="file" accept="image/jpeg, image/png" name="images" multiple="multiple"><br>
     <input type="submit" id="add" class="mt-5 btn btn-primary align-center" value="Thêm">
