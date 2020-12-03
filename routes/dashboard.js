@@ -13,6 +13,8 @@ router.get("/add", (req, res, next) => {
 
 router.post("/add-to-db", productController.insertProduct);
 
-router.post("/edited/:id", productController.updateProduct);
+router.put("/edited/:id", productController.updateProduct);
+
+router.delete("/deleted/:id", productController.deleteProduct);
 
 module.exports = router;

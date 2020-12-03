@@ -18,9 +18,14 @@ exports.insertProduct = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
     var updated = req.body.product;
-    await Product.updateOne({ _id: req.params.id }, updated, (err, result) => {
+    await Product.findOneAndUpdate({ _id: req.params.id }, updated, (err, result) => {
         if (err) throw err;
-        console.log("Updated product: " + updated.id);
+        console.log("Updated product: " + req.params.id);
     });
+    res.redirect('/');
+}
+
+exports.deleteProduct = async (req, res) => {
+    await Product.findOneAndDelete({ _id: req.params.id });
     res.redirect('/');
 }

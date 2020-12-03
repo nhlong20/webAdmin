@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Chỉnh sửa sản phẩm</h1>
 </div>
-<form class="form-group mt-5" action="/edited/<%=product._id%>" method="POST">
+<form class="form-group mt-5" action="/edited/<%=product._id%>?_method=PUT" method="POST">
     <label for="name">Tên sản phầm</label>
     <input type="text" id="name" name="product[name]" class="form-control" placeholder="" aria-describedby="helpId"
         value="<%=product.name%>">
@@ -24,4 +24,7 @@
     <input type="text" id="size" name="product[size]" class="form-control" placeholder="" aria-describedby="helpId"
         value="<%=product.size%>">
     <input type="submit" id="add" class="mt-5 btn btn-primary align-center" value="Cập nhật">
+</form>
+<form action="/deleted/<%=product._id%>?_method=DELETE" method="POST">
+    <input type="submit" id="add" class="mt-5 btn btn-danger align-center" value="Xóa">
 </form>
