@@ -1,0 +1,75 @@
+[{
+        "name": "STELLA GUNMETAL",
+        "price": "249000",
+        "status": "1",
+        "coverImage": "https://curnonwatch.com/media/catalog/product/s/t/stella-gunmetal-2-shadow_1.png?auto=webp&format=png&width=640&height=640&fit=cover&method=fit&nocrop=true",
+        "images": ["https://curnonwatch.com/media/catalog/product/s/t/stella-gunmetal-2-shadow_1.png?auto=webp&format=png&width=640&height=640&fit=cover&method=fit&nocrop=true",
+            "https://curnonwatch.com/media/catalog/product/s/t/stella-gunmetal-1-shadow.png?auto=webp&format=png&width=640&height=640&fit=cover&method=fit&nocrop=true",
+            "https://curnonwatch.com/media/catalog/product/1/2/12_4__1.jpg?auto=webp&format=pjpg&width=640&height=640&fit=cover&method=fit&nocrop=true"
+        ]
+    },
+    {
+        "name": "OWEN GUNMETAL",
+        "price": "249000",
+        "status": "1",
+        "coverImage": "https://curnonwatch.com/media/catalog/product/o/w/owen-gunmetal-2-shadow_1.png?auto=webp&format=png&width=640&height=640&fit=cover&method=fit&nocrop=true",
+        "images": ["https://curnonwatch.com/media/catalog/product/o/w/owen-gunmetal-2-shadow_1.png?auto=webp&format=png&width=640&height=640&fit=cover&method=fit&nocrop=true",
+            "https://curnonwatch.com/media/catalog/product/o/w/owen-gunmetal-1-shadow.png?auto=webp&format=png&width=640&height=640&fit=cover&method=fit&nocrop=true"
+        ]
+    },
+    {
+        "name": "HENRY GUNMETAL",
+        "price": "249000",
+        "status": "1",
+        "coverImage": "https://curnonwatch.com/media/catalog/product/h/e/henry-gunmetal-2shadow_1.png?auto=webp&format=png&width=640&height=640&fit=cover&method=fit&nocrop=true",
+        "images": ["https://curnonwatch.com/media/catalog/product/h/e/henry-gunmetal-2shadow_1.png?auto=webp&format=png&width=640&height=640&fit=cover&method=fit&nocrop=true",
+            "https://curnonwatch.com/media/catalog/product/h/e/henry-gunmetal-1-shadow.png?auto=webp&format=png&width=640&height=640&fit=cover&method=fit&nocrop=true",
+            "https://curnonwatch.com/media/catalog/product/1/1/11_1__1.jpg?auto=webp&format=pjpg&width=640&height=640&fit=cover&method=fit&nocrop=true"
+        ]
+    },
+    {
+        "name": "MINIMAL STACKER RING",
+        "price": "249000",
+        "status": "0",
+        "coverImage": "https://curnonwatch.com/media/catalog/product/a/u/aura_rings_shadow_3_.png?auto=webp&format=png&width=640&height=640&fit=cover&method=fit&nocrop=true",
+        "images": ["https://curnonwatch.com/media/catalog/product/a/u/aura_rings_shadow_3_.png?auto=webp&format=png&width=640&height=640&fit=cover&method=fit&nocrop=true",
+            "https://curnonwatch.com/media/catalog/product/a/u/aura_rings_shadow_14_.png?auto=webp&format=png&width=640&height=640&fit=cover&method=fit&nocrop=true",
+            "https://curnonwatch.com/media/catalog/product/a/u/auraasset-3_1.jpg?auto=webp&format=pjpg&width=640&height=640&fit=cover&method=fit&nocrop=true",
+            "https://curnonwatch.com/media/catalog/product/a/u/auraasset-5_2.jpg?auto=webp&format=pjpg&width=640&height=640&fit=cover&method=fit&nocrop=true"
+        ]
+    },
+    {
+        "name": "DUPLE RING",
+        "price": "299000",
+        "status": "1",
+        "coverImage": "https://curnonwatch.com/media/catalog/product/a/u/aura_rings_shadow_1_.png?auto=webp&format=png&width=640&height=640&fit=cover&method=fit&nocrop=true",
+        "images": ["https://curnonwatch.com/media/catalog/product/a/u/aura_rings_shadow_1_.png?auto=webp&format=png&width=640&height=640&fit=cover&method=fit&nocrop=true",
+            "https://curnonwatch.com/media/catalog/product/a/u/aura_rings_shadow_12_.png?auto=webp&format=png&width=640&height=640&fit=cover&method=fit&nocrop=true",
+            "https://curnonwatch.com/media/catalog/product/a/u/auraasset-5.jpg?auto=webp&format=pjpg&width=640&height=640&fit=cover&method=fit&nocrop=true",
+            "https://curnonwatch.com/media/catalog/product/a/u/auraasset-11.jpg?auto=webp&format=pjpg&width=640&height=640&fit=cover&method=fit&nocrop=true"
+        ]
+    },
+    {
+        "name": "CROSS RING",
+        "price": "299000",
+        "status": "1",
+        "coverImage": "https://curnonwatch.com/media/catalog/product/a/u/aura_rings_shadow_4_.png?auto=webp&format=png&width=640&height=640&fit=cover&method=fit&nocrop=true",
+        "images": ["https://curnonwatch.com/media/catalog/product/a/u/aura_rings_shadow_4_.png?auto=webp&format=png&width=640&height=640&fit=cover&method=fit&nocrop=true",
+            "https://curnonwatch.com/media/catalog/product/a/u/aura_rings_shadow_16_.png?auto=webp&format=png&width=640&height=640&fit=cover&method=fit&nocrop=true",
+            "https://curnonwatch.com/media/catalog/product/a/u/auraasset-1_2.jpg?auto=webp&format=pjpg&width=640&height=640&fit=cover&method=fit&nocrop=true",
+            "https://curnonwatch.com/media/catalog/product/a/u/auraasset-7_2.jpg?auto=webp&format=pjpg&width=640&height=640&fit=cover&method=fit&nocrop=true"
+        ]
+    },
+    {
+        "name": "HEARTFELT RING",
+        "price": "299000",
+        "status": "1",
+        "coverImage": "https://curnonwatch.com/media/catalog/product/a/u/aura_rings_shadow_9_.png?auto=webp&format=png&width=640&height=640&fit=cover&method=fit&nocrop=true",
+        "images": ["https://curnonwatch.com/media/catalog/product/a/u/aura_rings_shadow_9_.png?auto=webp&format=png&width=640&height=640&fit=cover&method=fit&nocrop=true",
+            "https://curnonwatch.com/media/catalog/product/a/u/aura_rings_shadow_19_.png?auto=webp&format=png&width=640&height=640&fit=cover&method=fit&nocrop=true",
+            "https://curnonwatch.com/media/catalog/product/a/u/auraasset-9_1.jpg?auto=webp&format=pjpg&width=640&height=640&fit=cover&method=fit&nocrop=true",
+            "https://curnonwatch.com/media/catalog/product/a/u/auraasset-4_1.jpg?auto=webp&format=pjpg&width=640&height=640&fit=cover&method=fit&nocrop=true"
+        ]
+    }
+
+]
