@@ -31,7 +31,8 @@ const productSchema = new Schema({
         trim: true
     },
     status: {
-        type: Boolean
+        type: Boolean,
+        default: 1
     },
     coverImage: {
         type: String,
