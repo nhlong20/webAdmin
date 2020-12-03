@@ -8,6 +8,14 @@ body {
   vertical-align: text-bottom;
 }
 
+a:visited{
+  color: #fff;
+}
+
+img{
+  width: 500px;
+}
+
 /*
  * Sidebar
  */

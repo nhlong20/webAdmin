@@ -4,7 +4,7 @@
 
 <div class="d-flex justify-content-between mb-3">
     <h2>Danh sách sản phẩm</h2>
-    <button type="button" class="btn btn-success"><a href="/add-item">Thêm sản phẩm</a></button>
+    <button type="button" class="btn btn-success"><a href="/add">Thêm sản phẩm</a></button>
 </div>
 <div class="table-responsive">
     <table class="table table-striped table-sm" aria-describedby="Product list">
@@ -12,35 +12,35 @@
             <tr>
                 <th id="id">ID</th>
                 <th id="name">Tên</th>
-                <th id="collection">Kích thước</th>
+                <th id="brand">Thương hiệu</th>
                 <th id="price">Giá</th>
-                <th id="discount">Giảm giá(%)</th>
+                <th id="status">Trạng thái</th>
                 <th id="modify">Cập nhật</th>
             </tr>
         </thead>
         <tbody>
+            <%
+            if(products.length != 0){
+                var i = 1;
+                products.forEach(data =>{
+            %>
             <tr>
-                <td>1,001</td>
-                <td>Lorem</td>
-                <td>ipsum</td>
-                <td>dolor</td>
-                <td>sit</td>
+                <td><%=i%></td>
+                <td><%=data.name%></td>
+                <td><%=data.brand%></td>
+                <td><%=data.price%></td>
+                <td><%=data.status%></td>
                 <td>
-                    <button type="button" class="btn btn-primary m-1" id="btn1">Sửa</button>
-                    <button type="button" class="btn btn-danger m-1">Xóa</button>
+                    <button class="btn btn-primary">
+                    <a style="color:#fff;" href="/edit/<%=data._id%>">Chỉnh sửa</a>
+                    </button>
                 </td>
             </tr>
-            <tr>
-                <td>1,002</td>
-                <td>amet</td>
-                <td>consectetur</td>
-                <td>adipiscing</td>
-                <td>elit</td>
-                <td>
-                    <button type="button" class="btn btn-primary m-1">Sửa</button>
-                    <button type="button" class="btn btn-danger m-1">Xóa</button>
-                </td>
-            </tr>
+            <%  i++; }) %>
+            <%  }else{%>
+            <td colspan="7">Không có dữ liệu</td>
+            <%}
+            %>
         </tbody>
     </table>
 </div>

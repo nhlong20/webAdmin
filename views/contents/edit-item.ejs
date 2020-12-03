@@ -1,0 +1,27 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Chỉnh sửa sản phẩm</h1>
+</div>
+<form class="form-group mt-5" action="/edited/<%=product._id%>" method="POST">
+    <label for="name">Tên sản phầm</label>
+    <input type="text" id="name" name="product[name]" class="form-control" placeholder="" aria-describedby="helpId"
+        value="<%=product.name%>">
+    <label for="brand">Tên thương hiệu</label>
+    <input type="text" id="brand" name="product[brand]" class="form-control" placeholder="" aria-describedby="helpId"
+        value="<%=product.brand%>">
+    <label for="price">Giá sản phẩm</label>
+    <input type="text" id="price" name="product[price]" class="form-control" placeholder="" aria-describedby="helpId"
+        value="<%=product.price%>">
+    <label for="color">Màu sản phầm</label>
+    <input type="text" id="color" name="product[color]" class="form-control" placeholder="" aria-describedby="helpId"
+        value="<%=product.color%>">
+    <label for="status">Trạng thái sản phầm</label>
+    <input type="text" id="status" name="product[status]" class="form-control" placeholder="" aria-describedby="helpId"
+        value="<%=product.status%>">
+    <label for="description">Mô tả sản phầm</label>
+    <input type="text" id="description" name="product[description]" class="form-control" placeholder=""
+        aria-describedby="helpId" value="<%=product.description%>">
+    <label for="size">Kích thước sản phẩm</label>
+    <input type="text" id="size" name="product[size]" class="form-control" placeholder="" aria-describedby="helpId"
+        value="<%=product.size%>">
+    <input type="submit" id="add" class="mt-5 btn btn-primary align-center" value="Cập nhật">
+</form>
