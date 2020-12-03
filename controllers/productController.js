@@ -32,7 +32,6 @@ exports.insertProduct = async (req, res) => {
         }
         var uploadedPath = files.images.path;
         const uploadedRes = await cloudinary.uploader.upload(uploadedPath);
-        fs.unlinkSync(uploadedPath);
         const product = fields;
         product.coverImage = uploadedRes.secure_url;
         const uploadProduct = await Product.create(product);
