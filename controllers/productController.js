@@ -23,14 +23,14 @@ exports.insertProduct = async (req, res) => {
     //console.log(product);
 
     const form = new formidable.IncomingForm();
-    form.uploadDir = path.join(__dirname, '../public/images');
+    form.uploadDir = path.join(__dirname, '/../uploads');
     form.keepExtensions = true;
     form.maxFieldsSize = 10 * 1024 * 1024; //10MB
     form.parse(req, async (err, fields, files) => {
         if (err) {
             return;
         }
-        var uploadedPath = files.images.path;
+        const uploadedPath = files.images.path;
         const uploadedRes = await cloudinary.uploader.upload(uploadedPath);
         const product = fields;
         product.coverImage = uploadedRes.secure_url;
