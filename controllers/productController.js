@@ -1,16 +1,21 @@
-const Product = require("../models/productModel");
-const fs = require("fs");
-const path = require("path");
-const formidable = require("formidable");
-
+const Product = require('../models/productModel');
+const fs = require('fs');
+const path = require('path');
+const formidable = require('formidable');
+var cloudinary = require('cloudinary').v2;
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
 exports.getAllProducts = async (req, res) => {
     const products = await Product.find({});
-    res.render("./contents/product", { products });
+    res.render('./contents/product', { products });
 };
 exports.editProduct = async (req, res) => {
     var id = req.params.id;
     const product = await Product.findById(id);
-    res.render("./contents/edit-item", { product });
+    res.render('./contents/edit-item', { product });
 };
 
 exports.insertProduct = async (req, res) => {
@@ -18,24 +23,23 @@ exports.insertProduct = async (req, res) => {
     //console.log(product);
 
     const form = new formidable.IncomingForm();
+    form.uploadDir = path.join(__dirname, '/../uploads');
+    form.keepExtensions = true;
+    form.maxFieldsSize = 10 * 1024 * 1024; //10MB
     form.parse(req, async (err, fields, files) => {
-        var product = fields.product;
+        if (err) {
+            return;
+        }
+        const uploadedPath = files.images.path;
+        const uploadedRes = await cloudinary.uploader.upload(uploadedPath);
+        const product = fields;
         console.log(product);
-        var oldPath = files.images.path;
-        var newPath =
-            path.join(__dirname, "/public/uploads/images") +
-            "/" +
-            files.images.name;
-        var rawData = fs.readFileSync(oldPath);
-        await Product.create(product);
-        fs.writeFile(newPath, rawData, (err) => {
-            if (err) console.log(err);
-            console.log("newpath: ", newPath);
-            console.log("raw: ", rawData);
-        });
+        product.coverImage = uploadedRes.secure_url;
+        const uploadProduct = await Product.create(product);
+        // console.log(uploadProduct);
+        console.log('Uploaded product successfully');
+        res.redirect('/');
     });
-
-    res.redirect("/");
 };
 
 exports.updateProduct = async (req, res) => {
@@ -45,13 +49,13 @@ exports.updateProduct = async (req, res) => {
         updated,
         (err, result) => {
             if (err) throw err;
-            console.log("Updated product: " + req.params.id);
+            console.log('Updated product: ' + req.params.id);
         }
     );
-    res.redirect("/");
+    res.redirect('/');
 };
 
 exports.deleteProduct = async (req, res) => {
     await Product.findOneAndDelete({ _id: req.params.id });
-    res.redirect("/");
+    res.redirect('/');
 };
