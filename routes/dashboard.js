@@ -8,7 +8,7 @@ router.get("/", productController.getAllProducts);
 router.get("/edit/:id", productController.editProduct)
 
 router.get("/add", (req, res, next) => {
-    res.render("./contents/add-item", { title: "AWS Add product" });
+    res.render("contents/add-item", { title: "AWS Add product" });
 });
 
 router.post("/add-to-db", productController.insertProduct);

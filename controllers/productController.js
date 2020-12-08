@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const formidable = require('formidable');
 const productService = require("../services/productService.js");
-const ITEM_PER_PAGE = 9;
+const ITEM_PER_PAGE = 15;
 
 var cloudinary = require('cloudinary').v2;
 cloudinary.config({
@@ -54,10 +54,8 @@ exports.insertProduct = async (req, res) => {
         const uploadedPath = files.images.path;
         const uploadedRes = await cloudinary.uploader.upload(uploadedPath);
         const product = fields;
-        console.log(product);
         product.coverImage = uploadedRes.secure_url;
         const uploadProduct = await Product.create(product);
-        // console.log(uploadProduct);
         console.log('Uploaded product successfully');
         res.redirect('/');
     });
