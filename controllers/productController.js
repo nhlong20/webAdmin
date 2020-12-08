@@ -23,7 +23,8 @@ function renderView(res, paginate, categoryPath) {
         ITEM_PER_PAGE: paginate.limit,
         prevPage: paginate.prevPage,
         nextPage: paginate.nextPage,
-        categoryPath: categoryPath
+        categoryPath: categoryPath,
+        searchString: paginate.search
     };
     res.render('./contents/product', pageControlObj);
 }
@@ -92,6 +93,6 @@ exports.searchProducts = async (req, res) => {
 
     const paginate = await productService.listProduct(query, page, limit);
     paginate.search = search;
-    const categoryPath = `/`;
+    const categoryPath = `/tim-kiem`;
     renderView(res, paginate, categoryPath);
 };
