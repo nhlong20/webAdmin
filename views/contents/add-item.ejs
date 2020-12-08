@@ -18,6 +18,22 @@
     <label for="size">Kích thước sản phẩm</label>
     <input type="text" id="size" name="product[size]" class="form-control" placeholder="" aria-describedby="helpId">
 
+    <label for="category">Dành cho</label>
+    <select id="category" class="form-control" name="product[category]">
+        <option value="volvo">Nam</option>
+        <option value="audi">Nữ</option>
+    </select>
+
+
+    <label for="category">Loại</label>
+    <select id="category" class="form-control" name="product[department]">
+        <option value="volvo">Đồng hồ</option>
+        <option value="audi">Phụ kiện</option>
+    </select>
+
+
+
+
     <label for="status">Ảnh sản phẩm</label><br>
     <input type="file" accept="image/jpeg, image/png" name="images" multiple="multiple"><br>
     <input type="submit" id="add" class="mt-5 btn btn-primary align-center" value="Thêm">
