@@ -29,25 +29,25 @@ function renderView(res, paginate, categoryPath) {
     res.render("./contents/product", pageControlObj);
 }
 
-exports.getAllProducts = async (req, res) => {
+exports.getAllProducts = async(req, res) => {
     const page = req.query.page * 1 || 1;
     const limit = req.query.limit * 1 || ITEM_PER_PAGE;
     const paginate = await productService.listProduct({}, page, limit);
     const categoryPath = '/';
     renderView(res, paginate, categoryPath);
 };
-exports.editProduct = async (req, res) => {
+exports.editProduct = async(req, res) => {
     var id = req.params.id;
     const product = await Product.findById(id);
     res.render('./contents/edit-item', { product });
 };
 
-exports.insertProduct = async (req, res) => {
+exports.insertProduct = async(req, res) => {
     const form = new formidable.IncomingForm();
     form.uploadDir = path.join(__dirname, '/../uploads');
     form.keepExtensions = true;
     form.maxFieldsSize = 10 * 1024 * 1024; //10MB
-    form.parse(req, async (err, fields, files) => {
+    form.parse(req, async(err, fields, files) => {
         if (err) {
             return;
         }
@@ -56,15 +56,19 @@ exports.insertProduct = async (req, res) => {
         const product = fields;
         product.coverImage = uploadedRes.secure_url;
         const uploadProduct = await Product.create(product);
+
+        fs.unlink(uploadedPath, function(err) {
+            if (err) throw err;
+            console.log('File deleted!');
+        });
         console.log('Uploaded product successfully');
         res.redirect('/');
     });
 };
 
-exports.updateProduct = async (req, res) => {
+exports.updateProduct = async(req, res) => {
     var updated = req.body.product;
-    await Product.findOneAndUpdate(
-        { _id: req.params.id },
+    await Product.findOneAndUpdate({ _id: req.params.id },
         updated,
         (err, result) => {
             if (err) throw err;
@@ -74,7 +78,7 @@ exports.updateProduct = async (req, res) => {
     res.redirect('/');
 };
 
-exports.deleteProduct = async (req, res) => {
+exports.deleteProduct = async(req, res) => {
     await Product.findOneAndDelete({ _id: req.params.id });
     res.redirect('/');
 };
