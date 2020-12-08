@@ -2,15 +2,39 @@ const Product = require('../models/productModel');
 const fs = require('fs');
 const path = require('path');
 const formidable = require('formidable');
+const productService = require("../services/productService.js");
+const ITEM_PER_PAGE = 9;
+
 var cloudinary = require('cloudinary').v2;
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
+
+
+function renderView(res, paginate, categoryPath) {
+    const pageControlObj = {
+        products: paginate.docs,
+        lastPage: paginate.totalPages,
+        totalProducts: paginate.totalDocs,
+        currentPage: paginate.page,
+        hasPrevPage: paginate.hasPrevPage,
+        hasNextPage: paginate.hasNextPage,
+        ITEM_PER_PAGE: paginate.limit,
+        prevPage: paginate.prevPage,
+        nextPage: paginate.nextPage,
+        categoryPath: categoryPath,
+    };
+    res.render("./contents/product", pageControlObj);
+}
+
 exports.getAllProducts = async (req, res) => {
-    const products = await Product.find({});
-    res.render('./contents/product', { products });
+    const page = req.query.page * 1 || 1;
+    const limit = req.query.limit * 1 || ITEM_PER_PAGE;
+    const paginate = await productService.listProduct({}, page, limit);
+    const categoryPath = '/';
+    renderView(res, paginate, categoryPath);
 };
 exports.editProduct = async (req, res) => {
     var id = req.params.id;
@@ -19,9 +43,6 @@ exports.editProduct = async (req, res) => {
 };
 
 exports.insertProduct = async (req, res) => {
-    //var product = req.body.product;
-    //console.log(product);
-
     const form = new formidable.IncomingForm();
     form.uploadDir = path.join(__dirname, '/../uploads');
     form.keepExtensions = true;
