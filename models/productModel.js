@@ -50,6 +50,7 @@ const productSchema = new Schema({
         type: String,
     },
 });
+productSchema.index({name: 'text', brand: 'text'});
 productSchema.plugin(mongoosePaginate);
 
 const Product = mongoose.model("Product", productSchema);
