@@ -93,6 +93,6 @@ exports.searchProducts = async (req, res) => {
 
     const paginate = await productService.listProduct(query, page, limit);
     paginate.search = search;
-    const categoryPath = `/tim-kiem`;
+    const categoryPath = '/search';
     renderView(res, paginate, categoryPath);
 };

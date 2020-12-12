@@ -16,5 +16,6 @@ router.post("/add-to-db", productController.insertProduct);
 router.put("/edited/:id", productController.updateProduct);
 
 router.delete("/deleted/:id", productController.deleteProduct);
-router.get('/tim-kiem', productController.searchProducts);
+router.get('/search', productController.searchProducts);
+
 module.exports = router;
