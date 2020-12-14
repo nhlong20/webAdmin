@@ -31,7 +31,7 @@ function renderView(res, paginate, custom) {
         queryString: custom.queryString ? "&" + custom.queryString : "",
     };
     res.status(200);
-    res.render("./contents/product", pageControlObj);
+    res.render("./contents/products", pageControlObj);
 }
 
 function toUpperOnlyFirstChar(word) {

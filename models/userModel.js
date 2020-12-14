@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 const crypto = require("crypto");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
+
+const mongoosePaginate = require("mongoose-paginate-v2");
+
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -18,6 +21,10 @@ const userSchema = new mongoose.Schema({
         unique: [true, "Email đã tổn tại, vui lòng kiểm tra lại"],
         lowercase: true,
         validate: [validator.isEmail, "Vui lòng cung cấp địa chỉ email hợp lệ"],
+    },
+    phoneNumber: {
+        type: Number,
+        required: false,
     },
     password: {
         type: String,
@@ -87,6 +94,8 @@ userSchema.methods.createVerifyToken = function () {
     console.log(this.verifyToken);
     return verifyToken;
 };
+
+userSchema.plugin(mongoosePaginate);
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;
