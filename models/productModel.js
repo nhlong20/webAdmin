@@ -25,7 +25,7 @@ const productSchema = new Schema({
     category: String, // category path
     price: {
         type: Number,
-        required: [true, "A product must have a price"],
+        required: [true, "A product must have price"],
     },
     description: {
         type: String,
@@ -36,7 +36,7 @@ const productSchema = new Schema({
     },
     coverImage: {
         type: String,
-        required: [true, "A product must have a cover image"],
+        required: [true, "A product must have cover image"],
     },
     color: {
         type: String,

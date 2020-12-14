@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const productController = require('./../controllers/productController');
+const productController = require('../controllers/productController');
 
 /* GET home page. */
 router.get("/", productController.getAllProducts);
@@ -16,6 +16,9 @@ router.post("/add-to-db", productController.insertProduct);
 router.put("/edited/:id", productController.updateProduct);
 
 router.delete("/deleted/:id", productController.deleteProduct);
+
 router.get('/search', productController.searchProducts);
+
+router.get('/:brand', )
 
 module.exports = router;

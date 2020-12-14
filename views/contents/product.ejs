@@ -1,140 +1,230 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h2>Danh sách sản phẩm</h2>
-
     <button type="button" class="btn btn-success"><a href="/add">Thêm sản phẩm</a></button>
 </div>
-<div class="table-responsive">
-    <table class="table table-striped table-sm" aria-describedby="Product list">
+<div class="card-body card shadow mb-4">
+    <div class="table-responsive card-body">
+        <div class="widget color">
+            <div class="row widget-desc d-flex">
+                <div class="col">
+                    <p class="widget-title2">Màu sắc</p>
+                    <ul class="d-flex ml-3">
+                        <li>
+                            <a href="<%=categoryPath%>?color=WHITE<%=queryString%>" data-view-label="WHITE"
+                                class="color-label color--white"></a>
+                        </li>
+                        <li>
+                            <a href="<%=categoryPath%>?color=BLACK<%=queryString%>" data-view-label="BLACK"
+                                class="color-label color--black"></a>
+                        </li>
+                        <li>
+                            <a href="<%=categoryPath%>?color=NAVY<%=queryString%>" data-view-label="NAVY"
+                                class="color-label color--navy"></a>
+                        </li>
+                        <li>
+                            <a href="<%=categoryPath%>?color=ROSEGOLD<%=queryString%>" data-view-label="ROSEGOLD"
+                                class="color-label color--rosegold"></a>
+                        </li>
+                        <li>
+                            <a href="<%=categoryPath%>?color=PEARL<%=queryString%>" data-view-label="PEARL"
+                                class="color-label color--pearl"></a>
+                        </li>
+                        <li>
+                            <a href="<%=categoryPath%>?color=GREY<%=queryString%>" data-view-label="GREY"
+                                class="color-label color--grey"></a>
+                        </li>
+                        <li>
+                            <a href="<%=categoryPath%>?color=PINK<%=queryString%>" data-view-label="PINK"
+                                class="color-label color--pink"></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <!-- Sorting -->
+                    <div class="product-sorting d-flex">
+                        <p>Sắp xếp</p>
+                        <form action="<%=categoryPath%>" method="GET">
+                            <select class="ml-2" name="sort" id="sortByselect" onchange="this.form.submit()">
+                                <option value="all">Tất cả</option>
+                                <option value="price">Giá tăng dần</option>
+                                <option value="-price">Giá giảm dần</option>
+                                <option value="name">Tên: A - Z</option>
+                                <option value="-name">Tên: Z - A</option>
+                            </select>
+                            <input type="submit" class="d-none" value="submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div card-header py-3>
+        <%if(searchString!=null){%>
+            <h3>Kết quả tìm kiếm cho "<%=searchString%>"</h3>
+            <%}%>
+    </div>
+    <table class="table table-bordered table-striped table-sm" aria-describedby="Product list">
         <thead>
             <tr>
                 <th id="name">Tên</th>
-                <th id="brand">Thương hiệu</th>
+                <th id=brand>
+                    <form action="<%=categoryPath%>?<%=queryString%>" method="GET">
+                        <select class="ml-2" name="brand" id="sortByselect" onchange="this.form.submit()">
+                            <option value="">Thương hiệu</option>
+                            <option value="">Tất cả</option>
+                            <option value="Jackson">Jackson</option>
+                            <option value="Kashmir">Kashmir</option>
+                            <option value="Colosseum">Colosseum</option>
+                            <option value="Mykonos">Mykonos</option>
+                            <option value="Santorini">Santorini</option>
+                            <option value="Florenge">Florenge</option>
+                            <option value="Melissani">Melissani</option>
+                            <option value="Hamilton">Hamilton</option>
+                            <option value="Moraine">Moraine</option>
+                            <option value="Beverly">Beverly</option>
+                        </select>
+                        <input type="submit" class="d-none" value="submit">
+                    </form>
+                </th>
                 <th id="price">Giá</th>
                 <th id="status">Trạng thái</th>
                 <th id="modify">Cập nhật</th>
             </tr>
         </thead>
         <tbody>
-            <%
-            if(products.length != 0){
-                products.forEach(data =>{
-            %>
-            <tr>
-                <td>
-                    <%=data.name%>
-                </td>
-                <td>
-                    <%=data.brand%>
-                </td>
-                <td>
-                    <%=data.price%>
-                </td>
-                <%if(data.status == 1){%>
-                <td>Còn hàng</td>
-                <%}else{%>
-                <td>Hết hàng</td>
-                <%}%>
+            <% if(products.length !=0){ products.forEach(data=>{
+                %>
+                <tr>
+                    <td>
+                        <%=data.name%>
+                    </td>
+                    <td>
+                        <%=data.brand%>
+                    </td>
+                    <td>
+                        <%=data.price%>
+                    </td>
+                    <%if(data.status==1){%>
+                        <td>Còn hàng</td>
+                        <%}else{%>
+                            <td>Hết hàng</td>
+                            <%}%>
                                 <td>
                                     <button class="btn btn-primary">
-                        <a style="color:#fff;" href="/edit/<%=data._id%>">Chỉnh sửa</a>
-                </button>
-                </td>
-            </tr>%>
-            <%  }) %>
-            <%  }else{%>
-            <td colspan="7">Không có dữ liệu</td>
-            <%}%>
+                                        <a style="color:#fff;" href="/edit/<%=data._id%>">Chỉnh sửa</a>
+                                    </button>
+                                </td>
+                </tr>%>
+                <% }) %>
+                    <% }else{%>
+                        <td colspan="7">Không có dữ liệu</td>
+                        <%}%>
         </tbody>
         <nav aria-label="navigation">
-            <ul class="pagination mt-50 mb-70">
-            <% if(currentPage && currentPage > 1){%>
-            <%if(searchString){%>
-            <li class="page-item">
-                <a class="page-link" href="<%=categoryPath%>?search=<%=searchString%>&page=<%=prevPage%>">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
-                    </svg>
-                </a>
-            </li>
-            <%} else{%>
-            <li class="page-item">
-                <a class="page-link" href="<%=categoryPath%>?page=<%=prevPage%>">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
-                    </svg>
-                </a>
-            </li>
-            <%}%>
-            <%}%>
+            <ul class="pagination">
+                <% if(currentPage && currentPage> 1){%>
+                    <%if(searchString){%>
+                        <li class="page-item">
+                            <a class="page-link" href="<%=categoryPath%>?search=<%=searchString%>&page=<%=prevPage%>">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left"
+                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                                </svg>
+                            </a>
+                        </li>
+                        <%} else{%>
+                            <li class="page-item">
+                                <a class="page-link" href="<%=categoryPath%>?page=<%=prevPage%>">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left"
+                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <%}%>
+                                <%}%>
 
-            <%if(hasPrevPage){%>
-            <%if(searchString){%>
-            <li class="page-item">
-                <a class="page-link" href="<%=categoryPath%>?search=<%=searchString%>&page=<%=prevPage%>">
-                    <%=nextPage%>
-                </a>
-            </li>
-            <%} else{%>
-            <li class="page-item">
-                <a class="page-link" href="<%=categoryPath%>?page=<%=prevPage%>">
-                    <%=prevPage%>
-                </a>
-            </li>
-            <%}%>
-            <%}%>
+                                    <%if(hasPrevPage){%>
+                                        <%if(searchString){%>
+                                            <li class="page-item">
+                                                <a class="page-link"
+                                                    href="<%=categoryPath%>?search=<%=searchString%>&page=<%=prevPage%>">
+                                                    <%=nextPage%>
+                                                </a>
+                                            </li>
+                                            <%} else{%>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="<%=categoryPath%>?page=<%=prevPage%>">
+                                                        <%=prevPage%>
+                                                    </a>
+                                                </li>
+                                                <%}%>
+                                                    <%}%>
 
-            <li class="page-item">
-                <a class="page-link" href="javascript:void(0)" tabindex="-1">
-                    <%=currentPage%>
-                </a>
-            </li>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="javascript:void(0)"
+                                                                tabindex="-1">
+                                                                <%=currentPage%>
+                                                            </a>
+                                                        </li>
 
-            <%if(hasNextPage){%>
-            <%if(searchString){%>
-            <li class="page-item">
-                <a class="page-link" href="<%=categoryPath%>?search=<%=searchString%>&page=<%=nextPage%>">
-                    <%=nextPage%>
-                </a>
-            </li>
-            <%} else{%>
-            <li class="page-item">
-                <a class="page-link" href="<%=categoryPath%>?page=<%=nextPage%>">
-                    <%=nextPage%>
-                </a>
-            </li>
-            <%}%>
-            <%}%>
+                                                        <%if(hasNextPage){%>
+                                                            <%if(searchString){%>
+                                                                <li class="page-item">
+                                                                    <a class="page-link"
+                                                                        href="<%=categoryPath%>?search=<%=searchString%>&page=<%=nextPage%>">
+                                                                        <%=nextPage%>
+                                                                    </a>
+                                                                </li>
+                                                                <%} else{%>
+                                                                    <li class="page-item">
+                                                                        <a class="page-link"
+                                                                            href="<%=categoryPath%>?page=<%=nextPage%>">
+                                                                            <%=nextPage%>
+                                                                        </a>
+                                                                    </li>
+                                                                    <%}%>
+                                                                        <%}%>
 
-            <%if(lastPage>currentPage){%>
-            <%if(searchString){%>
-            <li class="page-item">
-                <a class="page-link" href="<%=categoryPath%>?search=<%=searchString%>&page=<%=nextPage%>">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
-                    </svg>
-                </a>
-            </li>
-            <%} else{%>
-            <li class="page-item">
-                <a class="page-link" href="<%=categoryPath%>?page=<%=nextPage%>">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
-                    </svg>
-                </a>
-            </li>
-            <%}%>
-            <%}%>
-
+                                                                            <%if(lastPage>currentPage){%>
+                                                                                <%if(searchString){%>
+                                                                                    <li class="page-item">
+                                                                                        <a class="page-link"
+                                                                                            href="<%=categoryPath%>?search=<%=searchString%>&page=<%=nextPage%>">
+                                                                                            <svg width="1em"
+                                                                                                height="1em"
+                                                                                                viewBox="0 0 16 16"
+                                                                                                class="bi bi-arrow-right"
+                                                                                                fill="currentColor"
+                                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                                <path
+                                                                                                    fill-rule="evenodd"
+                                                                                                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                                                                                            </svg>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    <%} else{%>
+                                                                                        <li class="page-item">
+                                                                                            <a class="page-link"
+                                                                                                href="<%=categoryPath%>?page=<%=nextPage%>">
+                                                                                                <svg width="1em"
+                                                                                                    height="1em"
+                                                                                                    viewBox="0 0 16 16"
+                                                                                                    class="bi bi-arrow-right"
+                                                                                                    fill="currentColor"
+                                                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                                                    <path
+                                                                                                        fill-rule="evenodd"
+                                                                                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                                                                                                </svg>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <%}%>
+                                                                                            <%}%>
             </ul>
-            </nav>
+        </nav>
     </table>
 </div>
 </main>

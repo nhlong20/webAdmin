@@ -15,3 +15,43 @@ button a:visited{
 img{
   width: 500px;
 }
+
+.widget.color .widget-desc ul li a.color--white {
+  background-color: #ffffff;
+}
+
+.widget.color .widget-desc ul li a.color--black {
+  background-color: #000000;
+}
+
+.widget.color .widget-desc ul li a.color--navy {
+  background-color: #000080;
+}
+
+.widget.color .widget-desc ul li a.color--rosegold {
+  background-color: #b76e79;
+}
+
+.widget.color .widget-desc ul li a.color--pearl {
+  background-color: #eae0c8;
+}
+
+.widget.color .widget-desc ul li a.color--grey {
+  background-color: #DCDCDC;
+}
+
+.widget.color .widget-desc ul li a.color--pink {
+  background-color: #FFC0CB;
+}
+
+.widget.color .widget-desc ul li a.color8 {
+  background-color: #9a8777;
+}
+
+.widget.color .widget-desc ul li a.color9 {
+  background-color: #5b862a;
+}
+
+.widget.color .widget-desc ul li a.color10 {
+  background-color: #8662a9;
+}
