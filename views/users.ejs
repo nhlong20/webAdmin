@@ -4,30 +4,39 @@
 <div class="card-body card shadow mb-4">
     <div class="table-responsive card-body">
         <div class="widget color">
-            <div class="row widget-desc d-flex">
-                <div class="col">
+            <div class="widget-desc d-flex justify-content-between">
                     <!-- Sorting -->
-                    <div class="product-sorting d-flex">
+                    <div class="d-flex">
                         <p>Sắp xếp</p>
                         <form action="<%=categoryPath%>" method="GET">
                             <select class="ml-2" name="sort" id="sortByselect" onchange="this.form.submit()">
                                 <option hidden>Sắp xếp</option>
-                                <option value="all">Tất cả</option>
+                                <option value="all">Mặc định</option>
                                 <option value="name">Tên: A - Z</option>
                                 <option value="-name">Tên: Z - A</option>
                             </select>
                             <input type="submit" class="d-none" value="submit">
                         </form>
                     </div>
-                </div>
+                    <form action="/users/search" method="GET">
+                        <div class="input-group">
+                            <input type="search" class="form-control bg-light border-0 small" name="search"
+                                placeholder="Tìm kiếm người dùng..." aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
             </div>
         </div>
     </div>
-    <!-- <div card-header py-3>
+    <div card-header py-3>
         <%if(searchString!=null){%>
             <h3>Kết quả tìm kiếm cho "<%=searchString%>"</h3>
             <%}%>
-    </div> -->
+    </div>
     <table class="table table-bordered table-striped table-sm" aria-describedby="Product list">
         <thead>
             <tr>

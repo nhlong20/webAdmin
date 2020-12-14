@@ -10,7 +10,7 @@ module.exports.getUserById = async (uid) => {
     return await User.findById(uid);
 };
 
-module.exports.getAllUsers = async (query, options) => {
+module.exports.getUsers = async (query, options) => {
     const paginate = await User.paginate(query, options);
     return paginate;
 };

@@ -1,4 +1,4 @@
-const User = require("../controllers/userController");
+const userController = require("../controllers/userController");
 const userService = require("../services/userService.js");
 
 const ITEM_PER_PAGE = 15;
@@ -32,6 +32,22 @@ exports.getAllUsers = async (req, res) => {
         sort: req.query.sort || 'all'
     };
 
-    const paginate = await userService.getAllUsers(query, options);
+    const paginate = await userService.getUsers(query, options);
+    renderView(res, paginate, options);
+};
+
+exports.searchUser = async (req, res) => {
+    const search = req.query.search;
+    const options = {
+        page: req.query.page * 1 || 1,
+        limit: req.query.limit * 1 || ITEM_PER_PAGE,
+        sort: req.query.sort || "all",
+    };
+    var searchKey = new RegExp(search, "i");
+    let query = { email: searchKey };
+
+    const paginate = await userService.getUsers(query, options);
+    paginate.search = search;
+    options.categoryPath = '/users/search';
     renderView(res, paginate, options);
 };

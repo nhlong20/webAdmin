@@ -31,7 +31,7 @@ function renderView(res, paginate, custom) {
         queryString: custom.queryString ? "&" + custom.queryString : "",
     };
     res.status(200);
-    res.render("./contents/products", pageControlObj);
+    res.render("products", pageControlObj);
 }
 
 function toUpperOnlyFirstChar(word) {
@@ -48,11 +48,9 @@ function serializeQuery(query) {
     return str.join("&");
 }
 
-exports.getAllProducts = async (req, res) => {
+exports.getProducts = async (req, res) => {
     const { color, sort, brand } = req.query;
-
     const query = {};
-
     const options = {
         page: req.query.page * 1 || 1,
         limit: req.query.limit * 1 || ITEM_PER_PAGE,
@@ -70,10 +68,11 @@ exports.getAllProducts = async (req, res) => {
 
     renderView(res, paginate, custom);
 };
+
 exports.editProduct = async (req, res) => {
     var id = req.params.id;
     const product = await Product.findById(id);
-    res.render("./contents/edit-item", { product });
+    res.render("edit-product", { product });
 };
 
 exports.insertProduct = async (req, res) => {
@@ -120,13 +119,15 @@ exports.deleteProduct = async (req, res) => {
 
 exports.searchProducts = async (req, res) => {
     const search = req.query.search;
-    const page = req.query.page * 1 || 1;
-    const limit = req.query.limit * 1 || ITEM_PER_PAGE;
+    const options = {        
+        page: req.query.page * 1 || 1,
+        limit: req.query.limit * 1 || ITEM_PER_PAGE,
+    };
     var searchKey = new RegExp(search, "i");
     let query = { name: searchKey };
 
     const paginate = await productService.listProduct(query, page, limit);
     paginate.search = search;
-    const categoryPath = "/search";
-    renderView(res, paginate, categoryPath);
+    options.categoryPath = "/search";
+    renderView(res, paginate, options);
 };
