@@ -33,7 +33,7 @@
         </div>
     </div>
     <div card-header py-3>
-        <%if(searchString != null){%>
+        <%if(searchString !=null){%>
             <h3>Kết quả tìm kiếm cho "<%=searchString%>"</h3>
             <%}%>
     </div>
@@ -43,6 +43,7 @@
                 <th id="name" class="text-center">Tên</th>
                 <th id="email" class="text-center">Email</th>
                 <th id="phoneNumber" class="text-center">Số điện thoại</th>
+                <th id="gender" class="text-center">Giới tính</th>
                 <th id="status" class="text-center">Trạng thái</th>
                 <th id="modify" class="text-center">Thao tác</th>
             </tr>
@@ -59,22 +60,19 @@
                     <td class="align-middle text-center">
                         <%=user.phoneNumber%>
                     </td>
+                    <td class="align-middle text-center">
+                        <%=user.toJSON().gender%>
+                    </td>
                     <%if(user.active==true){%>
                         <td class="align-middle text-center">Kích hoạt</td>
-                        <td class="d-flex justify-content-around">
-                            <button class="btn btn-danger w-50 p-3">
-                                <a style="color:#fff;" href="/users/modify/<%=user._id%>">Hủy kích hoạt</a>
-                    <%}else{%>
-                        <td class="align-middle text-center">Chưa kích hoạt</td>
-                        <td class="d-flex justify-content-around">
-                            <button class="btn btn-success w-50 p-3">
-                                <a style="color:#fff;" href="/users/modify/<%=user._id%>">Kích hoạt</a>
-                    <%}%>
-                            </button>
-                            <button class="btn btn-primary">
-                                <a style="color:#fff;" href="/users/details/<%=user._id%>">Chi tiết</a>
-                            </button>
-                        </td>
+                        <%}else{%>
+                            <td class="align-middle text-center">Chưa kích hoạt</td>
+                            <%}%>
+                                <td class="align-middle text-center">
+                                    <button class="btn btn-primary">
+                                        <a style="color:#fff;" href="/users/details/<%=user._id%>">Chi tiết</a>
+                                    </button>
+                                </td>
                 </tr>
                 <%}) }else{%>
                     Không có dữ liệu người dùng
@@ -123,7 +121,7 @@
                                                 <%}%>
                                                     <%}%>
 
-                                                        <li class="page-item">
+                                                        <li class="page-item active">
                                                             <a class="page-link" href="javascript:void(0)"
                                                                 tabindex="-1">
                                                                 <%=currentPage%>

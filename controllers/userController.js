@@ -52,13 +52,11 @@ exports.searchUser = async (req, res) => {
     renderView(res, paginate, options);
 };
 
-exports.changeUserStatus = async (req, res) => {
+exports.changeUserLockedStatus = async (req, res) => {
     const id = req.params.id;
     const user = await userService.getUserById(id);
-    console.log(user);
-    console.log(user.active);
-    userService.changeUserStatusById(id, !user.active);
-    res.redirect('/users');
+    userService.changeUserLockedStatusById(id, !user.locked);
+    res.redirect('/users/details/' + id);
 };
 
 exports.showUserDetails = async (req, res) => {

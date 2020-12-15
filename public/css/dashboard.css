@@ -16,7 +16,7 @@ img{
   width: 500px;
 } */
 
-.user-heading.round a {
+.user-heading.round a img {
   border-radius: 50%;
   border: 10px solid rgba(255, 255, 255, 0.3);
   display: inline-block;

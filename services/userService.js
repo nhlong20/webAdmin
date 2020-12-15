@@ -10,10 +10,10 @@ module.exports.getUserById = async (uid) => {
     return await User.findById(uid);
 };
 
-module.exports.changeUserStatusById = async (uid, status) => {
-    return await User.findByIdAndUpdate({ _id: uid }, { active: status }, err => {
+module.exports.changeUserLockedStatusById = async (uid, status) => {
+    return await User.findByIdAndUpdate({ _id: uid }, { locked: status }, err => {
         if (err) throw err;
-        console.log("Update user status successfully");
+        console.log("Update user locked status successfully");
     });
 };
 

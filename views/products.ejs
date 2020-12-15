@@ -87,6 +87,7 @@
                     </form>
                 </th>
                 <th id="price" class="text-center">Giá</th>
+                <th id="color" class="text-center">Màu</th>
                 <th id="status" class="text-center">Trạng thái</th>
                 <th id="modify" class="text-center">Thao tác</th>
             </tr>
@@ -103,7 +104,10 @@
                     </td>
                     <td class="align-middle text-center">
                         <%=data.price%>
-                    </td class="align-middle text-center">
+                    </td>
+                    <td class="align-middle text-center">
+                        <%=data.color%>
+                    </td>
                     <%if(data.status==1){%>
                         <td class="align-middle text-center">Còn hàng</td>
                         <%}else{%>
@@ -163,7 +167,7 @@
                                                 <%}%>
                                                     <%}%>
 
-                                                        <li class="page-item">
+                                                        <li class="page-item active">
                                                             <a class="page-link" href="javascript:void(0)"
                                                                 tabindex="-1">
                                                                 <%=currentPage%>
