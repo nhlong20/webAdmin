@@ -5,30 +5,30 @@
     <div class="table-responsive card-body">
         <div class="widget color">
             <div class="widget-desc d-flex justify-content-between">
-                    <!-- Sorting -->
-                    <div class="d-flex">
-                        <p>Sắp xếp</p>
-                        <form action="<%=categoryPath%>" method="GET">
-                            <select class="ml-2" name="sort" id="sortByselect" onchange="this.form.submit()">
-                                <option hidden>Sắp xếp</option>
-                                <option value="all">Mặc định</option>
-                                <option value="name">Tên: A - Z</option>
-                                <option value="-name">Tên: Z - A</option>
-                            </select>
-                            <input type="submit" class="d-none" value="submit">
-                        </form>
-                    </div>
-                    <form action="/users/search" method="GET">
-                        <div class="input-group">
-                            <input type="search" class="form-control bg-light border-0 small" name="search"
-                                placeholder="Tìm kiếm người dùng..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
+                <!-- Sorting -->
+                <div class="d-flex">
+                    <p>Sắp xếp</p>
+                    <form action="<%=categoryPath%>" method="GET">
+                        <select class="ml-2" name="sort" id="sortByselect" onchange="this.form.submit()">
+                            <option hidden>Sắp xếp</option>
+                            <option value="all">Mặc định</option>
+                            <option value="name">Tên: A - Z</option>
+                            <option value="-name">Tên: Z - A</option>
+                        </select>
+                        <input type="submit" class="d-none" value="submit">
                     </form>
+                </div>
+                <form action="/users/search" method="GET">
+                    <div class="input-group">
+                        <input type="search" class="form-control bg-light border-0 small" name="search"
+                            placeholder="Tìm kiếm người dùng..." aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -50,25 +50,35 @@
         <tbody>
             <%if(users.length !=0 ){ users.forEach(user=>{%>
                 <tr>
-                    <td><%=user.name%></td>
-                    <td><%=user.email%></td>
-                    <td><%=user.phoneNumber%></td>
                     <td>
-                        <%if(user.active == true){%>
-                            Kích hoạt
-                        <%}else{%>
-                            Chưa kích hoạt
-                        <%}%>
+                        <%=user.name%>
                     </td>
                     <td>
-                        <button class="btn btn-primary">
-                            <a style="color:#fff;" href="/users/edit/<%=user._id%>">Chỉnh sửa</a>
-                        </button>
+                        <%=user.email%>
                     </td>
+                    <td>
+                        <%=user.phoneNumber%>
+                    </td>
+                    <%if(user.active==true){%>
+                        <td>Kích hoạt</td>
+                        <td class="d-flex justify-content-around">
+                            <button class="btn btn-danger w-50 p-3">
+                                <a style="color:#fff;" href="/users/modify/<%=user._id%>">Hủy kích hoạt</a>
+                    <%}else{%>
+                        <td>Chưa kích hoạt</td>
+                        <td class="d-flex justify-content-around">
+                            <button class="btn btn-success w-50 p-3">
+                                <a style="color:#fff;" href="/users/modify/<%=user._id%>">Kích hoạt</a>
+                    <%}%>
+                            </button>
+                            <button class="btn btn-primary">
+                                <a style="color:#fff;" href="/users/details/<%=user._id%>">Chi tiết</a>
+                            </button>
+                        </td>
                 </tr>
                 <%}) }else{%>
                     Không có dữ liệu người dùng
-                <%}%>
+                    <%}%>
         </tbody>
         <nav aria-label="navigation">
             <ul class="pagination">

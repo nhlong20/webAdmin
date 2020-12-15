@@ -19,6 +19,4 @@ router.delete("/deleted/:id", productController.deleteProduct);
 
 router.get('/search', productController.searchProducts);
 
-router.get('/:brand', )
-
 module.exports = router;

@@ -51,3 +51,19 @@ exports.searchUser = async (req, res) => {
     options.categoryPath = '/users/search';
     renderView(res, paginate, options);
 };
+
+exports.changeUserStatus = async (req, res) => {
+    const id = req.params.id;
+    const user = await userService.getUserById(id);
+    console.log(user);
+    console.log(user.active);
+    userService.changeUserStatusById(id, !user.active);
+    res.redirect('/users');
+};
+
+exports.showUserDetails = async (req, res) => {
+    const id = req.params.id;
+    const user = await userService.getUserById(id);
+    console.log(user);
+    res.render('user-details', { user });
+};

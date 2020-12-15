@@ -1,0 +1,16 @@
+<div class="card-body card shadow mb-4 flex-row d-flex">
+    <div class="user-heading round">
+        <a href="#">
+            <img class="img-responsive" src="<%=user.avatar%>" alt="profileImage">
+        </a>
+    </div>
+    <div class="ml-3 align-items-center">
+        <%user = user.toJSON();%>
+        <h2>Chi tiết người dùng</h2>
+        <h5>Tên: <%=user.name%></h5>
+        <h5>Email: <%=user.email%></h5>
+        <h5>Số điện thoại: <%=user.phoneNumber%></h5>
+        <h5>Giới tính: <%=user.gender%></h5>
+        <h5>Địa chỉ: <%=user.address%></h5>
+    </div>
+</div>
