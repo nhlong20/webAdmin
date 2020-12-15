@@ -66,8 +66,8 @@
     <table class="table table-bordered table-striped table-sm" aria-describedby="Product list">
         <thead>
             <tr>
-                <th id="name">Tên</th>
-                <th id=brand>
+                <th id="name" class="text-center">Tên</th>
+                <th id=brand class="text-center">
                     <form action="<%=categoryPath%>?<%=queryString%>" method="GET">
                         <select class="ml-2" name="brand" id="sortByselect" onchange="this.form.submit()">
                             <option value="">Thương hiệu</option>
@@ -86,30 +86,30 @@
                         <input type="submit" class="d-none" value="submit">
                     </form>
                 </th>
-                <th id="price">Giá</th>
-                <th id="status">Trạng thái</th>
-                <th id="modify">Cập nhật</th>
+                <th id="price" class="text-center">Giá</th>
+                <th id="status" class="text-center">Trạng thái</th>
+                <th id="modify" class="text-center">Thao tác</th>
             </tr>
         </thead>
         <tbody>
             <% if(products.length !=0){ products.forEach(data=>{
                 %>
                 <tr>
-                    <td>
+                    <td class="align-middle text-center">
                         <%=data.name%>
                     </td>
-                    <td>
+                    <td class="align-middle text-center">
                         <%=data.brand%>
                     </td>
-                    <td>
+                    <td class="align-middle text-center">
                         <%=data.price%>
-                    </td>
+                    </td class="align-middle text-center">
                     <%if(data.status==1){%>
-                        <td>Còn hàng</td>
+                        <td class="align-middle text-center">Còn hàng</td>
                         <%}else{%>
-                            <td>Hết hàng</td>
+                            <td class="align-middle text-center">Hết hàng</td>
                             <%}%>
-                                <td>
+                                <td class="align-middle text-center">
                                     <button class="btn btn-primary">
                                         <a style="color:#fff;" href="/edit/<%=data._id%>">Chỉnh sửa</a>
                                     </button>
@@ -117,7 +117,7 @@
                 </tr>%>
                 <% }) %>
                     <% }else{%>
-                        <td colspan="7">Không có dữ liệu</td>
+                        <td colspan="7" class="align-middle">Không có dữ liệu</td>
                         <%}%>
         </tbody>
         <nav aria-label="navigation">
