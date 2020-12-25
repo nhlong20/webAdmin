@@ -1,50 +1,50 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Chỉnh sửa sản phẩm</h1>
 </div>
-<form class="form-group mt-5" action="/edited/<%=product._id%>?_method=PUT" method="POST">
+<form class="form-group mt-5" action="/products/update?_method=PUT" method="POST" enctype="multipart/form-data">
     <div class="form-group">
         <label for="name">Tên sản phầm</label>
-        <input type="text" id="name" name="product[name]" class="form-control" placeholder="" aria-describedby="helpId"
-            value="<%=product.name%>">
+        <input type="text" id="name" name="name" class="form-control" placeholder="" aria-describedby="helpId"
+            value="<%=product.name%>" required>
     </div>
     <div class="form-group">
     <label for="brand">Tên thương hiệu</label>
-    <input type="text" id="brand" name="product[brand]" class="form-control" placeholder="" aria-describedby="helpId"
-        value="<%=product.brand%>">
+    <input type="text" id="brand" name="brand" class="form-control" placeholder="" aria-describedby="helpId"
+        value="<%=product.brand%>" required>
     </div>
     <div class="form-group">
         <label for="price">Giá sản phẩm</label>
-        <input type="text" id="price" name="product[price]" class="form-control" placeholder=""
-            aria-describedby="helpId" value="<%=product.price%>">
+        <input type="text" id="price" name="price" class="form-control" placeholder=""
+            aria-describedby="helpId" value="<%=product.price%>" required>
     </div>
     <div class="form-group">
         <label for="color">Màu sản phầm</label>
-        <input type="text" id="color" name="product[color]" class="form-control" placeholder=""
-            aria-describedby="helpId" value="<%=product.color%>">
+        <input type="text" id="color" name="color" class="form-control" placeholder=""
+            aria-describedby="helpId" value="<%=product.color%>" required>
     </div>
     <div class="form-group">
         <label for="status">Trạng thái sản phầm</label>
-        <input type="text" id="status" name="product[status]" class="form-control" placeholder=""
-            aria-describedby="helpId" value="<%=product.status%>">
+        <input type="text" id="status" name="status" class="form-control" placeholder=""
+            aria-describedby="helpId" value="<%=product.status%>" required>
     </div>
     <div class="form-group">
         <label for="description">Mô tả sản phầm</label>
-        <input type="text" id="description" name="product[description]" class="form-control" placeholder=""
-            aria-describedby="helpId" value="<%=product.description%>">
+        <input type="text" id="description" name="description" class="form-control" placeholder=""
+            aria-describedby="helpId" value="<%=product.description%>" required>
     </div>
 
     <div class="form-group">
         <label for="size">Kích thước sản phẩm</label>
-        <input type="text" id="size" name="product[size]" class="form-control" placeholder="" aria-describedby="helpId"
-            value="<%=product.size%>">
+        <input type="text" id="size" name="size" class="form-control" placeholder="" aria-describedby="helpId"
+            value="<%=product.size%>" required>
     </div>
     <div class="form-group">
-        <label for="status">Ảnh sản phẩm</label><br>
-        <input type="file" accept="image/jpeg, image/png, image/ipg" name="images" multiple="multiple">
+        <label for="file">Ảnh cover sản phẩm</label><br>
+        <input type="file" id="file" accept="image/jpeg, image/png, image/jpg" name="images" multiple="multiple"><br>
     </div>
     
-    <input type="submit" id="add" class="mt-5 btn btn-primary align-center" value="Cập nhật">
+    <input type="submit" id="update" class="mt-5 btn btn-primary align-center" value="Cập nhật">
 </form>
-<form action="/deleted/<%=product._id%>?_method=DELETE" method="POST">
-    <input type="submit" id="add" class="mt-5 btn btn-danger align-center" value="Xóa">
+<form action="/products/delete/<%=product._id%>?_method=DELETE" method="POST">
+    <input type="submit" id="delete" class="mt-5 btn btn-danger align-center" value="Xóa sản phẩm">
 </form>

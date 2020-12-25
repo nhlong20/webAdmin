@@ -40,7 +40,12 @@ function toUpperOnlyFirstChar(word) {
 function serializeQuery(query) {
     let str = [];
     for (let key in query)
-        if (query.hasOwnProperty(key) && key != 'color' && key != "category" && key != "page") {
+        if (
+            query.hasOwnProperty(key) &&
+            key != "color" &&
+            key != "category" &&
+            key != "page"
+        ) {
             str.push(
                 encodeURIComponent(key) + "=" + encodeURIComponent(query[key])
             );
@@ -87,8 +92,9 @@ exports.insertProduct = async (req, res) => {
         const uploadedPath = files.images.path;
         const uploadedRes = await cloudinary.uploader.upload(uploadedPath);
         const product = fields;
+        product.color.toUpperCase();
         product.coverImage = uploadedRes.secure_url;
-        const uploadProduct = await Product.create(product);
+        await Product.create(product);
 
         fs.unlink(uploadedPath, function (err) {
             if (err) throw err;
@@ -100,16 +106,33 @@ exports.insertProduct = async (req, res) => {
 };
 
 exports.updateProduct = async (req, res) => {
-    var updated = req.body.product;
-    await Product.findOneAndUpdate(
-        { _id: req.params.id },
-        updated,
-        (err, result) => {
-            if (err) throw err;
-            console.log("Updated product: " + req.params.id);
+    const form = new formidable.IncomingForm();
+    form.uploadDir = path.join(__dirname, "/../uploads");
+    form.keepExtensions = true;
+    form.maxFieldsSize = 10 * 1024 * 1024; //10MB
+    form.parse(req, async (err, fields, files) => {
+        if (err) {
+            return;
         }
-    );
-    res.redirect("/");
+        const uploadedPath = files.images.path;
+        const uploadedRes = await cloudinary.uploader.upload(uploadedPath);
+        const update = fields;
+        update.coverImage = uploadedRes.secure_url;
+        await Product.findOneAndUpdate(
+            { _id: update._id },
+            update,
+            (err, result) => {
+                if (err) throw err;
+                console.log("Updated product: " + update._id);
+            }
+        );
+
+        fs.unlink(uploadedPath, function (err) {
+            if (err) throw err;
+            console.log("File deleted!");
+        });
+        res.redirect("/");
+    });
 };
 
 exports.deleteProduct = async (req, res) => {
@@ -119,15 +142,15 @@ exports.deleteProduct = async (req, res) => {
 
 exports.searchProducts = async (req, res) => {
     const search = req.query.search;
-    const options = {        
+    const options = {
         page: req.query.page * 1 || 1,
         limit: req.query.limit * 1 || ITEM_PER_PAGE,
     };
     var searchKey = new RegExp(search, "i");
     let query = { name: searchKey };
 
-    const paginate = await productService.listProduct(query, page, limit);
+    const paginate = await productService.listProduct(query, options);
     paginate.search = search;
-    options.categoryPath = "/search";
+    options.categoryPath = "/products/search";
     renderView(res, paginate, options);
 };

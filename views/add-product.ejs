@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Thêm sản phẩm mới</h1>
 </div>
-<form class="mt-5" action="/add-to-db" method="POST" enctype="multipart/form-data">
+<form class="mt-5" action="/products/insert" method="POST" enctype="multipart/form-data">
     <div class="form-group">
         <label for="name">Tên sản phầm</label>
         <input type="text" id="name" name="name" class="form-control" placeholder="" aria-describedby="helpId" required>
@@ -65,4 +65,3 @@
 
     <input type="submit" id="add" class="mt-5 btn btn-primary align-center" value="Thêm">
 </form>
-<script src="/javascripts/scripts.js"></script>

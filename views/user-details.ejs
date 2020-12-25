@@ -3,6 +3,16 @@
         <a href="#">
             <img class="img-responsive" src="<%=user.avatar%>" alt="profileImage">
         </a>
+        <div>
+            <%if(user.locked==true){%>
+                <button class="btn btn-danger">
+                    <a style="color:#fff;" href="/users/change-locked/<%=user._id%>">Khóa</a>
+                    <%}else{%>
+                        <button class="btn btn-success">
+                            <a style="color:#fff;" href="/users/change-locked/<%=user._id%>">Mở khóa</a>
+                            <%}%>
+                        </button>
+        </div>
     </div>
     <div class="ml-3 align-items-center">
         <%user=user.toJSON();%>

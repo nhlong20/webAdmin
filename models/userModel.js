@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const crypto = require("crypto");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
-
 const mongoosePaginate = require("mongoose-paginate-v2");
 
 const userSchema = new mongoose.Schema({
@@ -15,16 +14,24 @@ const userSchema = new mongoose.Schema({
         default:
             "https://res.cloudinary.com/dh5xeom6f/image/upload/v1607703995/hsi57cqpkpxjzxoela74.jpg",
     },
+    phoneNumber: {
+        type: String,
+        required: false,
+    },
+    gender: {
+        type: String,
+        required: false,
+    },
+    address: {
+        type: String,
+        required: false,
+    },
     email: {
         type: String,
         required: [true, "Please provide your email"],
         unique: [true, "Email đã tổn tại, vui lòng kiểm tra lại"],
         lowercase: true,
         validate: [validator.isEmail, "Vui lòng cung cấp địa chỉ email hợp lệ"],
-    },
-    phoneNumber: {
-        type: Number,
-        required: false,
     },
     password: {
         type: String,
@@ -52,7 +59,7 @@ const userSchema = new mongoose.Schema({
     },
     locked: {
         type: Boolean,
-        default: false,  
+        default: false,
     },
     verifyToken: String,
 });
