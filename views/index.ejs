@@ -28,6 +28,7 @@
                 <form action="/" method="GET">
                     <select class="ml-2" name="unit" onchange="this.form.submit()">
                         <option>Lọc theo thời gian</option>
+                        <option value="today">Hôm nay</option>
                         <option value="week">Tuần hiện tại</option>
                         <option value="month">Tháng hiện tại</option>
                         <option value="quarter">Quý hiện tại</option>
@@ -41,15 +42,17 @@
             </div>
             <div>
                 <div>Danh sách sản phẩm đã bán trong
-                    <%if(statistics.timeUnit=='week' ){%>
-                        tuần:
-                        <%}else if(statistics.timeUnit=='month' ){%>
-                            tháng:
-                            <%}else if(statistics.timeUnit=='quarter' ){%>
-                                quý:
-                                <%}else if(statistics.timeUnit=='year' ){%>
-                                    năm
-                                    <%}%>
+                    <%if(statistics.timeUnit=='today' ){%>
+                        hôm nay
+                        <%}else if(statistics.timeUnit=='week' ){%>
+                            tuần:
+                            <%}else if(statistics.timeUnit=='month' ){%>
+                                tháng:
+                                <%}else if(statistics.timeUnit=='quarter' ){%>
+                                    quý:
+                                    <%}else if(statistics.timeUnit=='year' ){%>
+                                        năm
+                                        <%}%>
                 </div>
                 <% if(statistics.productList.length !=0){ statistics.productList.forEach(data=>{%>
                     <div class="col-md-6 mb-2">

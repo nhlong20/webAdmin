@@ -5,6 +5,9 @@ function getRevenueStatisticsFromStartDate(timeUnit, allOrders) {
     const now = new Date();
     var startDate = new Date;
     switch (timeUnit) {
+        case 'today':
+            startDate = now;
+            break;
         case "week":
             startDate = new Date(
                 now.setDate(now.getDate() - now.getDay() + 1)
@@ -38,7 +41,6 @@ function getRevenueStatisticsFromStartDate(timeUnit, allOrders) {
 
     var productList = new Map();
     orders.forEach((element) => {
-        console.log(element);
         for (var item in element.products) {
             let product = element.products[item];
             if (productList.has(product.item._id)) {
@@ -58,7 +60,7 @@ function getRevenueStatisticsFromStartDate(timeUnit, allOrders) {
 };
 
 exports.dashboard = async (req, res) => {
-    const unit = req.query.unit || "week";
+    const unit = req.query.unit || "today";
 
     const allProducts = await productService.getAllProducts();
     const allOrders = await orderService.getAllOrders();

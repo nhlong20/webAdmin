@@ -6,17 +6,17 @@
         <div class="widget color">
             <div class="widget-desc d-flex justify-content-between">
                 <!-- Sorting -->
-                <div class="d-flex">
-                    <p>Sắp xếp</p>
-                    <form action="<%=categoryPath%>" method="GET">
-                        <select class="ml-2" name="sort" id="sortByselect" onchange="this.form.submit()">
-                            <option hidden>Sắp xếp</option>
-                            <option value="all">Mặc định</option>
-                            <option value="name">Tên: A - Z</option>
-                            <option value="-name">Tên: Z - A</option>
-                        </select>
-                        <input type="submit" class="d-none" value="submit">
-                    </form>
+                <div class="col">
+                    <div class="dropdown mb-4">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Sắp xếp
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="<%=categoryPath%>?sort=name<%=queryString%>">Tên: A - Z</a>
+                            <a class="dropdown-item" href="<%=categoryPath%>?sort=-name<%=queryString%>">Tên: Z - A</a>
+                        </div>
+                    </div>
                 </div>
                 <form action="/users/search" method="GET">
                     <div class="input-group">

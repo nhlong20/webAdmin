@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2");
 
 const orderSchema = new mongoose.Schema(
     {
@@ -28,8 +29,8 @@ const orderSchema = new mongoose.Schema(
             default: false,
         },
         status: {
-            type: String,
-            default: "Đang giao hàng",
+            type: Number,
+            default: 1,
             require: true,
         },
     },
@@ -42,6 +43,7 @@ const orderSchema = new mongoose.Schema(
 //     });
 //     next();
 // });
+orderSchema.plugin(mongoosePaginate);
 
 const Order = mongoose.model("Order", orderSchema);
 

@@ -11,6 +11,7 @@ const dashboardRouter = require('./routes/dashboardRouters');
 const productRouter = require("./routes/productRouters");
 const usersRouter = require('./routes/usersRouters');
 const authRouter = require('./routes/authRouters');
+const orderRouter = require("./routes/orderRouters");
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
 
+app.use("/orders", orderRouter);
 app.use('/products', productRouter);
 app.use('/users', usersRouter);
 app.use('/', dashboardRouter);

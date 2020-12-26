@@ -44,7 +44,8 @@ function serializeQuery(query) {
             query.hasOwnProperty(key) &&
             key != "color" &&
             key != "category" &&
-            key != "page"
+            key != "page" &&
+            key != 'sort'
         ) {
             str.push(
                 encodeURIComponent(key) + "=" + encodeURIComponent(query[key])
@@ -67,7 +68,7 @@ exports.getProducts = async (req, res) => {
 
     const custom = {};
     custom.queryString = serializeQuery(req.query);
-    custom.categoryPath = "/";
+    custom.categoryPath = "/products";
 
     const paginate = await productService.listProduct(query, options);
 
@@ -101,7 +102,7 @@ exports.insertProduct = async (req, res) => {
             console.log("File deleted!");
         });
         console.log("Uploaded product successfully");
-        res.redirect("/");
+        res.redirect("/products");
     });
 };
 
@@ -131,7 +132,7 @@ exports.updateProduct = async (req, res) => {
             if (err) throw err;
             console.log("File deleted!");
         });
-        res.redirect("/");
+        res.redirect("/products");
     });
 };
 

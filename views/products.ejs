@@ -40,19 +40,20 @@
                     </ul>
                 </div>
                 <div class="col">
-                    <!-- Sorting -->
-                    <div class="product-sorting d-flex">
-                        <p>Sắp xếp</p>
-                        <form action="<%=categoryPath%>" method="GET">
-                            <select class="ml-2" name="sort" id="sortBySelect" onchange="this.form.submit()">
-                                <option value="all">Tất cả</option>
-                                <option value="price">Giá tăng dần</option>
-                                <option value="-price">Giá giảm dần</option>
-                                <option value="name">Tên: A - Z</option>
-                                <option value="-name">Tên: Z - A</option>
-                            </select>
-                            <input type="submit" class="d-none" value="submit">
-                        </form>
+                    <div class="dropdown mb-4 float-right">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sắp xếp
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="<%=categoryPath%>?sort=all<%=queryString%>">Tất cả</a>
+                            <a class="dropdown-item" href="<%=categoryPath%>?sort=price<%=queryString%>">Giá tăng
+                                dần</a>
+                            <a class="dropdown-item" href="<%=categoryPath%>?sort=-price<%=queryString%>">Giá giảm
+                                dần</a>
+                            <a class="dropdown-item" href="<%=categoryPath%>?sort=name<%=queryString%>">Tên: A - Z</a>
+                            <a class="dropdown-item" href="<%=categoryPath%>?sort=-name<%=queryString%>">Tên: Z - A</a>
+                        </div>
                     </div>
                 </div>
             </div>
