@@ -1,25 +1,74 @@
 <div class="card-body card shadow mb-4">
     <div class="row">
-        <div class="col">
+        <div class="col text-center">
             <h3>Top sản phẩm bán chạy</h3>
-            <div class="col-md-6 mb-2">
-                <div class="card border-left-primary shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xl font-weight-bold text-primary text-uppercase mb-1">
-                                    Name</div>
-                                <div class="mb-0 text-gray-800">Số lượng:</div>
+            <% if(topProducts.length !=0){ topProducts.forEach(data=>{%>
+                <div class="col-md-6 mb-2">
+                    <div class="card border-left-primary shadow">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xl font-weight-bold text-primary text-uppercase mb-1">
+                                        <%=data.name%>
+                                    </div>
+                                    <div class="mb-0 text-gray-800">Số lượng: <%=data.sold%>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <%});}%>
         </div>
         <div class="border">
         </div>
-        <div class="col">
+        <div class="col text-center">
             <h3>Doanh số bán hàng</h3>
+            <div class="product-sorting d-flex">
+                <form action="/" method="GET">
+                    <select class="ml-2" name="unit" onchange="this.form.submit()">
+                        <option>Lọc theo thời gian</option>
+                        <option value="week">Tuần hiện tại</option>
+                        <option value="month">Tháng hiện tại</option>
+                        <option value="quarter">Quý hiện tại</option>
+                        <option value="year">Năm hiện tại</option>
+                    </select>
+                    <input type="submit" class="d-none" value="submit">
+                </form>
+            </div>
+            <div>
+                Doanh thu: <%=statistics.revenue%> VNĐ
+            </div>
+            <div>
+                <div>Danh sách sản phẩm đã bán trong
+                    <%if(statistics.timeUnit=='week' ){%>
+                        tuần:
+                        <%}else if(statistics.timeUnit=='month' ){%>
+                            tháng:
+                            <%}else if(statistics.timeUnit=='quarter' ){%>
+                                quý:
+                                <%}else if(statistics.timeUnit=='year' ){%>
+                                    năm
+                                    <%}%>
+                </div>
+                <% if(statistics.productList.length !=0){ statistics.productList.forEach(data=>{%>
+                    <div class="col-md-6 mb-2">
+                        <div class="card border-left-success shadow">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xl font-weight-bold text-primary text-uppercase mb-1">
+                                            <%=data.item.name%>
+                                        </div>
+                                        <div class="mb-0 text-gray-800">Số lượng: <%=data.qty%>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%});}%>
+            </div>
         </div>
     </div>
 </div>

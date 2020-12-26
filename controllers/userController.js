@@ -1,4 +1,3 @@
-const userController = require("../controllers/userController");
 const userService = require("../services/userService.js");
 
 const ITEM_PER_PAGE = 15;

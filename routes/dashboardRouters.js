@@ -1,8 +1,7 @@
 var express = require("express");
 var router = express.Router();
+const dasboardController = require("../controllers/dashboardController");
 
-router.get("/", (req, res, next) => {
-    res.render('./index');
-});
+router.get("/", dasboardController.dashboard);
 
 module.exports = router;

@@ -49,6 +49,10 @@ const productSchema = new Schema({
     size: {
         type: String,
     },
+    sold: {
+        type: Number,
+        default: 0,
+    }
 });
 productSchema.index({name: 'text', brand: 'text'});
 productSchema.plugin(mongoosePaginate);
