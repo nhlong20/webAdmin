@@ -2,28 +2,6 @@
     <h2>Danh sách đơn hàng</h2>
 </div>
 <div class="card-body card shadow mb-4">
-    <!-- <div class="table-responsive card-body">
-        <div class="widget color">
-            <div class="widget-desc d-flex justify-content-between">
-                <div class="col">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Trạng thái
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="<%=categoryPath%>?status=1<%=queryString%>">Đang giao
-                                hàng</a>
-                            <a class="dropdown-item" href="<%=categoryPath%>?status=0<%=queryString%>">Giao hàng thành
-                                công</a>
-                            <a class="dropdown-item" href="<%=categoryPath%>?status=-1<%=queryString%>">Đã hủy đơn
-                                hàng</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
     <div>
         <div class="dropdown mb-4 float-right">
             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -41,7 +19,7 @@
         </div>
     </div>
     <%if(orders.length !=0 ){ orders.forEach(order=>{%>
-        <table class="table table-bordered table-striped table-sm" aria-describedby="Product list">
+        <table class="table table-bordered table-striped table-sm" aria-describedby="Order list">
             <thead>
                 <tr>
                     <th id="id" class="text-center">Mã đơn hàng</th>

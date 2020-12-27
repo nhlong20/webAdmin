@@ -2,9 +2,7 @@
 const crypto = require("crypto");
 
 const User = require("../models/userModel");
-const authService = require("../services/authService");
 const userService = require("../services/userService");
-const { sendEmail } = require("../services/emailService");
 
 exports.signup = async (req, res, next) => {
     try {
@@ -173,11 +171,11 @@ exports.isLoggedIn = (req, res, next) => {
         return next();
     }
     req.flash("error", "Bạn cần đăng nhập trước để tiếp tục");
-    res.redirect("/dang-nhap");
+    res.redirect("/login");
 };
 exports.isGuest = (req, res, next) => {
     if (!req.isAuthenticated()) {
         return next();
     }
-    res.redirect("/");
+    res.redirect("/login");
 };

@@ -10,7 +10,7 @@ passport.use(
             passwordField: "password",
         },
         async function (email, password, done) {
-            const user = await authService.checkCredentials(email, password);
+            const user = await authService.checkCredential(email, password);
             if (!user) {
                 return done(null, false, {
                     message: "Bạn nhập sai tên đăng nhập hoặc mật khẩu",

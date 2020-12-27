@@ -36,7 +36,7 @@ function getRevenueStatisticsFromStartDate(timeUnit, allOrders) {
 
     const orders = allOrders.filter((order) => {
         const date = new Date(order.createdAt);
-        return date >= startDate;
+        return date >= startDate && order.status == 0;
     });
 
     var productList = new Map();
@@ -70,3 +70,4 @@ exports.dashboard = async (req, res) => {
     const statistics = getRevenueStatisticsFromStartDate(unit, allOrders);
     res.render("index", { topProducts, statistics });
 };
+

@@ -31,7 +31,7 @@ function renderView(res, paginate, custom) {
         queryString: custom.queryString ? "&" + custom.queryString : "",
     };
     res.status(200);
-    res.render("products", pageControlObj);
+    res.render("./products/products", pageControlObj);
 }
 
 function toUpperOnlyFirstChar(word) {
@@ -78,7 +78,7 @@ exports.getProducts = async (req, res) => {
 exports.editProduct = async (req, res) => {
     var id = req.params.id;
     const product = await Product.findById(id);
-    res.render("edit-product", { product });
+    res.render("./products/edit-product", { product });
 };
 
 exports.insertProduct = async (req, res) => {

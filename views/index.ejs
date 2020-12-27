@@ -2,76 +2,94 @@
     <div class="row">
         <div class="col text-center">
             <h3>Top sản phẩm bán chạy</h3>
-            <% if(topProducts.length !=0){ topProducts.forEach(data=>{%>
-                <div class="col-md-6 mb-2">
-                    <div class="card border-left-primary shadow">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xl font-weight-bold text-primary text-uppercase mb-1">
-                                        <%=data.name%>
-                                    </div>
-                                    <div class="mb-0 text-gray-800">Số lượng: <%=data.sold%>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <%});}%>
+            <% if(topProducts.length !=0){%>
+                <table class="table table-bordered table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th id="name" class="text-center">Tên</th>
+                            <th id="price" class="text-center">Giá</th>
+                            <th id="sold" class="text-center">Đã bán</th>
+                        </tr>
+                    </thead>
+                    <%topProducts.forEach(data=>{%>
+                        <tr>
+                            <td class="align-middle text-center">
+                                <%=data.name%>
+                            </td>
+                            <td class="align-middle text-center">
+                                <%=data.price%>
+                            </td>
+                            <td class="align-middle text-center">
+                                <%=data.sold%>
+                            </td>
+                        </tr>
+                        <%});%>
+                </table>
+                <%}%>
         </div>
         <div class="border">
         </div>
         <div class="col text-center">
             <h3>Doanh số bán hàng</h3>
-            <div class="product-sorting d-flex">
-                <form action="/" method="GET">
-                    <select class="ml-2" name="unit" onchange="this.form.submit()">
-                        <option>Lọc theo thời gian</option>
-                        <option value="today">Hôm nay</option>
-                        <option value="week">Tuần hiện tại</option>
-                        <option value="month">Tháng hiện tại</option>
-                        <option value="quarter">Quý hiện tại</option>
-                        <option value="year">Năm hiện tại</option>
-                    </select>
-                    <input type="submit" class="d-none" value="submit">
-                </form>
-            </div>
             <div>
-                Doanh thu: <%=statistics.revenue%> VNĐ
-            </div>
-            <div>
-                <div>Danh sách sản phẩm đã bán trong
-                    <%if(statistics.timeUnit=='today' ){%>
-                        hôm nay
-                        <%}else if(statistics.timeUnit=='week' ){%>
-                            tuần:
-                            <%}else if(statistics.timeUnit=='month' ){%>
-                                tháng:
-                                <%}else if(statistics.timeUnit=='quarter' ){%>
-                                    quý:
-                                    <%}else if(statistics.timeUnit=='year' ){%>
-                                        năm
-                                        <%}%>
-                </div>
-                <% if(statistics.productList.length !=0){ statistics.productList.forEach(data=>{%>
-                    <div class="col-md-6 mb-2">
-                        <div class="card border-left-success shadow">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xl font-weight-bold text-primary text-uppercase mb-1">
-                                            <%=data.item.name%>
-                                        </div>
-                                        <div class="mb-0 text-gray-800">Số lượng: <%=data.qty%>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="col">
+                    <div class="dropdown mb-4 float-right">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Lọc theo thời gian
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/?unit=today">Hôm nay</a>
+                            <a class="dropdown-item" href="/?unit=week">Tuần hiện tại</a>
+                            <a class="dropdown-item" href="/?unit=month">Tháng hiện tại</a>
+                            <a class="dropdown-item" href="/?unit=quarter">Quý hiện tại</a>
+                            <a class="dropdown-item" href="/?unit=year">Năm hiện tại</a>
                         </div>
                     </div>
-                    <%});}%>
+                </div>
+                <div>
+                    Doanh thu: <%=statistics.revenue%> VNĐ
+                </div>
+                <div>
+                    <div>Danh sách sản phẩm đã bán trong
+                        <%if(statistics.timeUnit=='today' ){%>
+                            hôm nay:
+                            <%}else if(statistics.timeUnit=='week' ){%>
+                                tuần:
+                                <%}else if(statistics.timeUnit=='month' ){%>
+                                    tháng:
+                                    <%}else if(statistics.timeUnit=='quarter' ){%>
+                                        quý:
+                                        <%}else if(statistics.timeUnit=='year' ){%>
+                                            năm:
+                                            <%}%>
+                    </div>
+                </div>
             </div>
+            <% if(statistics.productList.length !=0){%>
+                <table class="table table-bordered table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th id="name" class="text-center">Tên</th>
+                            <th id="price" class="text-center">Giá</th>
+                            <th id="sold" class="text-center">Đã bán</th>
+                        </tr>
+                    </thead>
+                    <%statistics.productList.forEach(data=>{%>
+                        <tr>
+                            <td class="align-middle text-center">
+                                <%=data.item.name%>
+                            </td>
+                            <td class="align-middle text-center">
+                                <%=data.item.price%>
+                            </td>
+                            <td class="align-middle text-center">
+                                <%=data.qty%>
+                            </td>
+                        </tr>
+                        <%});%>
+                </table>
+                <%}%>
         </div>
     </div>
 </div>

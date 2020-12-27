@@ -20,12 +20,12 @@ function renderView(res, paginate, custom) {
         queryString: custom.queryString ? "&" + custom.queryString : "",
     };
     res.status(200);
-    res.render("orders", pageControlObj);
+    res.render("./orders/orders", pageControlObj);
 }
 
 exports.getAllOrders = async (req, res) => {
     const { status } = req.query;
-    
+
     const query = {};
     status ? query.status = status : null;
 

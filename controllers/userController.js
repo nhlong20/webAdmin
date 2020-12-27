@@ -20,7 +20,7 @@ function renderView(res, paginate, custom) {
         queryString: custom.queryString ? "&" + custom.queryString : "",
     };
     res.status(200);
-    res.render("users", pageControlObj);
+    res.render("./users/users", pageControlObj);
 }
 
 exports.getAllUsers = async (req, res) => {
@@ -62,5 +62,16 @@ exports.showUserDetails = async (req, res) => {
     const id = req.params.id;
     const user = await userService.getUserById(id);
     console.log(user);
-    res.render('user-details', { user });
+    res.render("./users/user-details", { user });
+};
+
+exports.logout = (req, res) => {
+    req.logout();
+    res.redirect("/");
+};
+
+exports.getProfile = async (req, res, next) => {
+    let user = req.user;
+    const pageType = req.originalUrl;
+    res.render("profile", { user, pageType });
 };

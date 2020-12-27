@@ -8,7 +8,7 @@ router.get("/", productController.getProducts);
 router.get("/edit/:id", productController.editProduct)
 
 router.get("/add", (req, res, next) => {
-    res.render("add-product");
+    res.render("./products/add-product");
 });
 
 router.post("/insert", productController.insertProduct);
