@@ -1,4 +1,14 @@
 const userService = require("../services/userService.js");
+const User = require("../models/userModel");
+
+const path = require("path");
+const formidable = require("formidable");
+var cloudinary = require("cloudinary").v2;
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 const ITEM_PER_PAGE = 15;
 
@@ -28,7 +38,7 @@ exports.getAllUsers = async (req, res) => {
     const options = {
         page: req.query.page * 1 || 1,
         limit: req.query.limit * 1 || ITEM_PER_PAGE,
-        sort: req.query.sort || 'all'
+        sort: req.query.sort || "all",
     };
 
     const paginate = await userService.getUsers(query, options);
@@ -47,7 +57,7 @@ exports.searchUser = async (req, res) => {
 
     const paginate = await userService.getUsers(query, options);
     paginate.search = search;
-    options.categoryPath = '/users/search';
+    options.categoryPath = "/users/search";
     renderView(res, paginate, options);
 };
 
@@ -55,13 +65,12 @@ exports.changeUserLockedStatus = async (req, res) => {
     const id = req.params.id;
     const user = await userService.getUserById(id);
     userService.changeUserLockedStatusById(id, !user.locked);
-    res.redirect('/users/details/' + id);
+    res.redirect("/users/details/" + id);
 };
 
 exports.showUserDetails = async (req, res) => {
     const id = req.params.id;
     const user = await userService.getUserById(id);
-    console.log(user);
     res.render("./users/user-details", { user });
 };
 
@@ -74,4 +83,49 @@ exports.getProfile = async (req, res, next) => {
     let user = req.user;
     const pageType = req.originalUrl;
     res.render("profile", { user, pageType });
+};
+
+exports.changeInformation = async (req, res, next) => {
+    try {
+        // Get user from db
+        const user = await userService.getUserById(req.user._id);
+        // Update information
+        user.name = req.body.name;
+        user.phoneNumber = req.body.phoneNumber;
+        user.gender = req.body.gender;
+
+        await user.save({ validateBeforeSave: false });
+
+        console.log("Information changed uccessfully");
+        //Redirect user
+        req.flash("success", "Thông tin của bạn đã được cập nhật thành công");
+        res.redirect("/users/details/" + user._id);
+    } catch (error) {
+        const errorMsg = error.message.split(":").pop();
+        console.log(errorMsg);
+        req.flash("error", errorMsg);
+        res.redirect("/users/details/" + req.user._id);
+    }
+};
+
+exports.changeProfilePicture = async (req, res, next) => {
+    const form = new formidable.IncomingForm();
+
+    form.uploadDir = path.join(__dirname, "/../uploads");
+    form.keepExtensions = true;
+    form.maxFieldsSize = 10 * 1024 * 1024; //10MB
+    form.parse(req, async (err, fields, files) => {
+        if (err) {
+            return;
+        }
+        const uploadedPath = files.images.path;
+        const uploadedRes = await cloudinary.uploader.upload(uploadedPath);
+        await User.findOneAndUpdate(
+            { _id: req.user._id },
+            { avatar: uploadedRes.secure_url }
+        );
+        // fs.unlinkSync(uploadedPath);
+        console.log("Upload profile picture successfully");
+        res.redirect("/users/details/" + req.user._id);
+    });
 };

@@ -1,6 +1,6 @@
 <div class="card-body card shadow mb-4 flex-row d-flex">
     <div class="user-heading round text-center">
-        <a href="#">
+        <a href="#" class="m-3" data-toggle="modal" data-target="#changeProfilePicture">
             <img class="img-responsive" src="<%=user.avatar%>" alt="profileImage">
         </a>
         <div>
@@ -13,6 +13,15 @@
                             <%}%>
                         </button>
         </div>
+        <%if(user.admin){%>
+            <div class="m-3">
+                <a href="#" data-toggle="modal" data-target="#changeInformationModal">Thay đổi thông tin</a>
+                <div class="border"></div>
+                <a href="#" data-toggle="modal" data-target="#changePasswordModal">Thay đổi mật khẩu</a>
+            </div>
+            <%}%>
+    </div>
+    <div class="border">
     </div>
     <div class="ml-3 align-items-center">
         <%user=user.toJSON();%>
@@ -29,3 +38,162 @@
             </h5>
     </div>
 </div>
+
+<div class="modal fade" id="changeInformationModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <form action="/users/changeInformation" method="POST">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLable">Thay đổi thông tin</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="profile-info col-md-7 col-lg-9">
+
+                        <div class="panel">
+                            <div class="form-group row bio-row">
+                                <label for="name" class="col-lg-4 col-form-label">Họ tên:</label>
+                                <div class="col-lg-10">
+                                    <input type="name" class="form-control" id="name" name="name"
+                                        value="<%=user.name%>">
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row bio-row">
+                                <label for="phone" class="col-lg-4 col-form-label">Số điện thoại:</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" id="phone" name="phoneNumber"
+                                        value="<%=user.phoneNumber%>">
+                                </div>
+                            </div>
+
+                            <div class="form-group row bio-row">
+                                <label class="col-lg-4 col-form-label">Giới tính</label>
+                                <div class="row col-lg-10 ml-1">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="gender" id="Male"
+                                            value="Male" <%if(user.gender=="Male" ){%>
+                                        <%="checked"%>
+                                            <%}%>
+                                                >
+                                                <label class="form-check-label" for="Male">Nam</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="gender" id="Female"
+                                            value="Female" <%if(user.gender=="Female" ){%>
+                                        <%="checked"%>
+                                            <%}%>>
+                                                <label class="form-check-label" for="Female">Nữ</label>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+                    <button class="btn btn-primary" type="submit" href="#">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="changePasswordModal" tabindex="-2" role="dialog" aria-hidden="true">
+    <form action="/users/changePassword" method="POST">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLable">Thay đổi mật khẩu</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body bio-graph-info">
+                        <div class="form-group row bio-row">
+                            <label for="oldPassword" class="col-lg-4 col-form-label">Mật khẩu
+                                cũ:</label>
+                            <div class="col-lg-10">
+                                <input type="password" class="form-control" id="old-password" name="oldPassword"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="form-group row bio-row">
+                            <label for="newPassword" class="col-lg-4 col-form-label">Mật khẩu
+                                mới:</label>
+                            <div class="col-lg-10">
+                                <input type="password" class="form-control" id="new-password" name="newPassword"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="form-group row bio-row">
+                            <label for="passwordConfirm" class="col-lg-4 col-form-label">Xác nhận mật khẩu
+                                mới:</label>
+                            <div class="col-lg-10">
+                                <input type="password" class="form-control" id="password-confirm" name="passwordConfirm"
+                                    required>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+                    <button class="btn btn-primary" type="submit" href="#">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="changeProfilePicture" tabindex="-2" role="dialog" aria-hidden="true">
+    <form action="/users/changeProfilePicture" method="POST" enctype="multipart/form-data">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLable">Thay đổi ảnh đại diện</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body bio-graph-info">
+                        <div class="form-group row bio-row">
+                            <div class="col-lg-10">
+                                <div id="upload-file-control">
+                                    <input type="file" id="upload-file-btn" name="images"
+                                        accept="image/jpeg, image/png, image/jpg" hidden onchange="setFileNameText()">
+                                    <label id="upload-file-label" for="upload-file-btn" class="btn btn-primary">Chọn
+                                        ảnh</label>
+                                    <span id="file-chosen">Không có ảnh nào được chọn</span>
+                                </div>
+                                <div>
+                                    <p>Định dạng: .jpeg, .png, .jpg</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+                    <button class="btn btn-primary" type="submit" href="#">Cập nhật ảnh</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    function setFileNameText() {
+        const fileUploadButton = document.getElementById('upload-file-btn');
+        console.log("file name is:" + fileUploadButton.files[0].name);
+        const fileChosen = document.getElementById('file-chosen');
+        fileChosen.textContent = fileUploadButton.files[0].name;
+    };
+</script>

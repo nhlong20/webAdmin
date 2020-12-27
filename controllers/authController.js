@@ -146,22 +146,27 @@ exports.changePassword = async (req, res) => {
     try {
         // Get user from db
         const user = await User.findById(req.user._id).select("+password");
+        console.log(user);
         // Check posted password and userpassword
         if (!(await user.checkPassword(req.body.oldPassword, user.password))) {
-            throw new Error("Mật khẩu cũ không đúng, vui lòng kiểm tra lại");
+            let message = "Mật khẩu cũ không đúng, vui lòng kiểm tra lại"
+            res.render('error', {message});
+            throw new Error(message);
         }
         // Update password
         user.password = req.body.newPassword;
         user.passwordConfirm = req.body.passwordConfirm;
         await user.save();
 
+        console.log("Password updated successfully");
         //Redirect user
         req.flash("success", "Mật khẩu của bạn đã được cập nhật thành công");
-        res.redirect("/account/password/change");
+        res.redirect("/users/details/" + user._id);
     } catch (error) {
         const errorMsg = error.message.split(":").pop();
+        console.log(errorMsg);
         req.flash("error", errorMsg);
-        res.redirect("/account/password/change");
+        res.redirect("/users/details/" + user._id);
     }
 };
 
