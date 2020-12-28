@@ -3,32 +3,38 @@ const orderService = require("../services/orderService.js");
 
 function getRevenueStatisticsFromStartDate(timeUnit, allOrders) {
     const now = new Date();
-    var startDate = new Date;
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var startDate = new Date();
     switch (timeUnit) {
         case 'today':
-            startDate = now;
+            startDate = today;
+            console.log("today" + startDate);
             break;
         case "week":
             startDate = new Date(
-                now.setDate(now.getDate() - now.getDay() + 1)
+                today.setDate(today.getDate() - today.getDay() + 1)
             );
+            console.log("week" + startDate);
             break;
         case "month":
             startDate = new Date(
-                now.getFullYear(),
-                now.getMonth(),
+                today.getFullYear(),
+                today.getMonth(),
                 1
             );
+            console.log("month" + startDate);
             break;
         case "quarter":
             startDate = new Date(
-                now.getFullYear(),
-                Math.floor((now.getMonth() - 1) / 3) * 3 + 1,
+                today.getFullYear(),
+                Math.floor(today.getMonth() / 3) * 3,
                 1
             );
+            console.log("quarter" + startDate);
             break;
         case "year":
-            startDate = new Date(now.getFullYear(), 1, 1);
+            startDate = new Date(today.getFullYear(), 1, 1);
+            console.log("year" + startDate);
             break;
         default:
             return 0;
