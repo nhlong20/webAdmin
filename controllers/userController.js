@@ -96,7 +96,7 @@ exports.changeInformation = async (req, res, next) => {
 
         await user.save({ validateBeforeSave: false });
 
-        console.log("Information changed uccessfully");
+        console.log("Information changed successfully");
         //Redirect user
         req.flash("success", "Thông tin của bạn đã được cập nhật thành công");
         res.redirect("/users/details/" + user._id);

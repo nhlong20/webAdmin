@@ -66,7 +66,7 @@ exports.dashboard = async (req, res) => {
     const allOrders = await orderService.getAllOrders();
 
     allProducts.sort((a, b) => parseInt(b.sold) - parseInt(a.sold));
-    const topProducts = allProducts.slice(0, 5);
+    const topProducts = allProducts.slice(0, 10);
     const statistics = getRevenueStatisticsFromStartDate(unit, allOrders);
     res.render("index", { topProducts, statistics });
 };

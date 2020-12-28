@@ -1,22 +1,23 @@
 var express = require("express");
+const { isLoggedIn } = require("../controllers/authController");
 var router = express.Router();
 const productController = require('../controllers/productController');
 
 /* GET home page. */
-router.get("/", productController.getProducts);
+router.get("/", isLoggedIn, productController.getProducts);
 
-router.get("/edit/:id", productController.editProduct)
+router.get("/edit/:id", isLoggedIn, productController.editProduct)
 
-router.get("/add", (req, res, next) => {
+router.get("/add", isLoggedIn, (req, res, next) => {
     res.render("./products/add-product");
 });
 
-router.post("/insert", productController.insertProduct);
+router.post("/insert", isLoggedIn, productController.insertProduct);
 
-router.put("/update", productController.updateProduct);
+router.put("/update", isLoggedIn, productController.updateProduct);
 
-router.delete("/delete/:id", productController.deleteProduct);
+router.delete("/delete/:id", isLoggedIn, productController.deleteProduct);
 
-router.get('/search', productController.searchProducts);
+router.get('/search', isLoggedIn, productController.searchProducts);
 
 module.exports = router;

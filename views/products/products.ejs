@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h2>Danh sách sản phẩm</h2>
-    <button type="button" class="btn btn-success"><a href="/products/add">Thêm sản phẩm</a></button>
+    <a class="btn btn-success" href="/products/add">Thêm sản phẩm</a>
 </div>
 <div class="card-body card shadow mb-4">
     <div class="table-responsive card-body">
@@ -115,9 +115,8 @@
                             <td class="align-middle text-center">Hết hàng</td>
                             <%}%>
                                 <td class="align-middle text-center">
-                                    <button class="btn btn-primary">
-                                        <a style="color:#fff;" href="/products/edit/<%=data._id%>">Chỉnh sửa</a>
-                                    </button>
+                                    <a class="btn btn-primary" style="color:#fff;"
+                                        href="/products/edit/<%=data._id%>">Chỉnh sửa</a>
                                 </td>
                 </tr>%>
                 <% }) %>
