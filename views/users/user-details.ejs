@@ -4,9 +4,9 @@
             <img class="img-responsive" src="<%=user.avatar%>" alt="profileImage">
         </a>
         <div>
-            <%if(user.locked==false){%>
+            <%if(user.locked==false && !user.admin){%>
                     <a class="btn btn-danger" style="color:#fff;" href="/users/change-locked/<%=user._id%>">Khóa</a>
-                    <%}else{%>
+                    <%}if(user.locked==true && !user.admin){%>
                             <a class="btn btn-success" style="color:#fff;" href="/users/change-locked/<%=user._id%>">Mở khóa</a>
                             <%}%>
         </div>

@@ -90,6 +90,7 @@
                 <th id="price" class="text-center">Giá</th>
                 <th id="color" class="text-center">Màu</th>
                 <th id="status" class="text-center">Trạng thái</th>
+                <th id="modify" class="text-center">Lượt xem</th>
                 <th id="modify" class="text-center">Thao tác</th>
             </tr>
         </thead>
@@ -114,6 +115,7 @@
                         <%}else{%>
                             <td class="align-middle text-center">Hết hàng</td>
                             <%}%>
+                            <td class="align-middle text-center"><%=data.views%></td>
                                 <td class="align-middle text-center">
                                     <a class="btn btn-primary" style="color:#fff;"
                                         href="/products/edit/<%=data._id%>">Chỉnh sửa</a>

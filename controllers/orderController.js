@@ -36,3 +36,9 @@ exports.getAllOrders = async (req, res) => {
     const paginate = await orderService.listOrder(query, options);
     renderView(res, paginate, options);
 };
+
+exports.showOrderDetails = async (req, res) => {
+    const id = req.params.id;
+    const order = await orderService.getOrderById(id);
+    res.render("./orders/order-details", { order });
+};

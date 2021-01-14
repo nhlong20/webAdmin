@@ -1,0 +1,69 @@
+<div class="custom-panel panel-body bio-graph-info">
+    <h1 class="bio-header">Chi tiết đơn hàng #<%=order.order_id%> -<strong>
+                <%if (order.status==1) { %>
+                    Đang giao hàng
+                    <% } else if (order.status==0) { %>
+                        Giao hàng thành công
+                        <%} else if (order.status==-1) { %>
+                            Đã hủy
+                            <%}%>
+            </strong>
+    </h1>
+    <p>Ngày đặt hàng: <%=order.createdAt.toLocaleDateString("vi-VN")%>
+    </p>
+
+    <table class="table table-striped table-sm text-center" aria-describedby="Product list">
+        <thead class="thead-dark">
+            <tr>
+                <th class="order-image">Hình sản phẩm</th>
+                <th class="order-product">Sản phẩm</th>
+                <th class="order-price-unit">Đơn giá</th>
+                <th class="order-qty">Số lượng</th>
+                <th class="order-subtotal">Tạm tính</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for( let id in order.products ) { %>
+                <tr>
+                    <td class="align-middle">
+                        <img src="<%= order.products[id].item.coverImage %>" alt="" width="80px" height="auto">
+                    </td>
+                    <td class="align-middle">
+                        <%= order.products[id].item.name %>
+                            <% if (order.products[id].item.brand) { %>
+                                <%= " - " + order.products[id].item.brand %>
+                                    <% } %>
+                                        <% if (order.products[id].item.size) { %>
+                                            <%= " - " + order.products[id].item.size %>
+                                                <% } %>
+                    </td>
+                    <td class="align-middle">
+                        <%=(order.products[id].item.price.toLocaleString())%> VNĐ
+                    </td>
+                    <td class="align-middle">
+                        <%= order.products[id].qty %>
+                    </td>
+                    <td class="align-middle">
+                        <%= (order.products[id].item.price*order.products[id].qty.toLocaleString()) %> VNĐ
+                    </td>
+                </tr>
+                <% } %>
+        </tbody>
+    </table>
+    <div class="order-summary">
+        <p>Tạm tính: <span>
+                <%= (order.totalPrice.toLocaleString()) %> VNĐ
+            </span> </p>
+        <p>Phí vận chuyển: 0 VNĐ</p>
+        <p>Tổng cộng: <strong style="color: red">
+                <%= (order.totalPrice.toLocaleString()) %> VNĐ
+            </strong></p>
+
+    </div>
+
+</div>
+
+<div class="order--return mb-2">
+    <a href="/orders"> <i class="fas fa-angle-double-left"></i>
+        Quay lại trang quản lý đơn hàng</a>
+</div>

@@ -36,10 +36,10 @@
                         <%=order.order_id%>
                     </td>
                     <td class="align-middle text-center">
-                        <%=order.createdAt%>
+                        <%=order.createdAt.toLocaleDateString("vi-VN")%>
                     </td>
                     <td class="align-middle text-center">
-                        <%=order.totalPrice%>
+                        <%=order.totalPrice.toLocaleString()%>
                     </td>
                     <td class="align-middle text-center">
                         <%=order.paymentType%>
@@ -54,19 +54,7 @@
                                     <%}%>
                     </td>
                     <td class="align-middle text-center">
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Danh sách
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <%for(var item in order.products){ let product=order.products[item]; %>
-                                    <div class="dropdown-item">
-                                        <%=product.item.name%>
-                                    </div>
-                                    <%}%>
-                            </div>
-                        </div>
+                        <a class="btn btn-primary" style="color:#fff;" href="/orders/details/<%=order._id%>">Chi tiết</a>
                     </td>
                 </tr>
                 <%}) }else{%>
