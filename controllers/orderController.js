@@ -31,7 +31,7 @@ exports.getAllOrders = async (req, res) => {
 
     const options = {
         page: req.query.page * 1 || 1,
-        limit: req.query.limit * 1 || ITEM_PER_PAGE,
+        limit: req.query.limit * 1 || ITEM_PER_PAGE
     };
     const paginate = await orderService.listOrder(query, options);
     renderView(res, paginate, options);

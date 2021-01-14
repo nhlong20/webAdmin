@@ -6,7 +6,7 @@ function getRevenueStatisticsFromStartDate(timeUnit, allOrders) {
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     var startDate = new Date();
     switch (timeUnit) {
-        case 'today':
+        case "today":
             startDate = today;
             console.log("today" + startDate);
             break;
@@ -17,11 +17,7 @@ function getRevenueStatisticsFromStartDate(timeUnit, allOrders) {
             console.log("week" + startDate);
             break;
         case "month":
-            startDate = new Date(
-                today.getFullYear(),
-                today.getMonth(),
-                1
-            );
+            startDate = new Date(today.getFullYear(), today.getMonth(), 1);
             console.log("month" + startDate);
             break;
         case "quarter":
@@ -33,7 +29,7 @@ function getRevenueStatisticsFromStartDate(timeUnit, allOrders) {
             console.log("quarter" + startDate);
             break;
         case "year":
-            startDate = new Date(today.getFullYear(), 1, 1);
+            startDate = new Date(today.getFullYear(), 0, 1);
             console.log("year" + startDate);
             break;
         default:
@@ -41,7 +37,7 @@ function getRevenueStatisticsFromStartDate(timeUnit, allOrders) {
     }
 
     const orders = allOrders.filter((order) => {
-        const date = new Date(order.createdAt);
+        let date = new Date(order.createdAt);
         return date >= startDate && order.status == 0;
     });
 
@@ -52,18 +48,39 @@ function getRevenueStatisticsFromStartDate(timeUnit, allOrders) {
             if (productList.has(product.item._id)) {
                 let currentProduct = productList.get(product.item._id);
                 currentProduct.qty += product.qty;
-                productList.set(
-                    product.item._id,
-                    currentProduct
-                );
+                productList.set(product.item._id, currentProduct);
             } else {
                 productList.set(product.item._id, product);
             }
-        };
+        }
     });
-    const revenue = orders.reduce((total, current) => total + current.totalPrice, 0);
-    return {timeUnit, revenue , productList };
-};
+
+    let monthData = allOrders.filter((order) => {
+        let date = new Date(order.createdAt);
+        return (
+            date >= new Date(today.getFullYear(), today.getMonth(), 1) &&
+            order.status == 0
+        );
+    });
+
+    let daysInMonth = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+    chartData = new Array(daysInMonth);
+    chartData.fill(0);
+    monthData.forEach((order) => {
+        let date = new Date(order.createdAt);
+        if (chartData[date.getDate() - 1] != null) {
+            chartData[date.getDate() - 1] += order.totalPrice;
+        } else {
+            chartData[date.getDate() - 1] = order.totalPrice;
+        }
+    })
+
+    const revenue = orders.reduce(
+        (total, current) => total + current.totalPrice,
+        0
+    );
+    return { timeUnit, revenue, productList, chartData };
+}
 
 exports.dashboard = async (req, res) => {
     const unit = req.query.unit || "today";
@@ -76,4 +93,3 @@ exports.dashboard = async (req, res) => {
     const statistics = getRevenueStatisticsFromStartDate(unit, allOrders);
     res.render("index", { topProducts, statistics });
 };
-

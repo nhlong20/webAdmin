@@ -17,7 +17,7 @@
                                 <%=data.name%>
                             </td>
                             <td class="align-middle text-center">
-                                <%=data.price%>
+                                <%=data.price.toLocaleString()%> VNĐ
                             </td>
                             <td class="align-middle text-center">
                                 <%=data.sold%>
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div>
-                    Doanh thu: <%=statistics.revenue%> VNĐ
+                    Doanh thu: <%=statistics.revenue.toLocaleString()%> VNĐ
                 </div>
                 <div>
                     <div>Danh sách sản phẩm đã bán trong
@@ -93,28 +93,29 @@
         </div>
     </div>
     <div class="row">
-        <canvas id="myChart" width="400" height="100"></canvas>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
-        <script>
-            function renderChart(data, labels) {
-                var ctx = document.getElementById("myChart").getContext('2d');
-                var myChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: 'Doanh thu tháng này',
-                            data: data,
-                            backgroundColor: "rgba(255, 99, 132, 0.2)",
-                            borderColor: "rgba(255, 99, 132, 1)",
-                            borderWidth: 1
-                        }]
-                    },
-                });
-            }
-            data = [20000, 14000, 12000, 15000, 18000, 19000, 22000];
-            labels = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
-            renderChart(data, labels);
-        </script>
+        <% var stat=statistics%>
+            <canvas id="myChart" width="400" height="100"></canvas>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+            <script>
+                function renderChart(data, labels) {
+                    var ctx = document.getElementById("myChart").getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Doanh thu tháng này',
+                                data: data,
+                                backgroundColor: "rgba(255, 99, 132, 0.2)",
+                                borderColor: "rgba(255, 99, 132, 1)",
+                                borderWidth: 1
+                            }]
+                        },
+                    });
+                }
+                let charData = JSON.parse("[" + '<%- statistics.chartData %>' + "]");
+                let labels = new Array(charData.length).fill().map((_, idx) => 1 + idx);
+                renderChart(charData, labels);
+            </script>
     </div>
 </div>
