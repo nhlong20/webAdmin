@@ -42,3 +42,15 @@ exports.showOrderDetails = async (req, res) => {
     const order = await orderService.getOrderById(id);
     res.render("./orders/order-details", { order });
 };
+
+exports.delivered = async (req, res) => {
+    const id = req.params.id;
+    orderService.changeOrderStatusById(id, 0);
+    res.redirect("/orders");
+}
+
+exports.canceled = async (req, res) => {
+    const id = req.params.id;
+    orderService.changeOrderStatusById(id, -1);
+    res.redirect("/orders");
+};

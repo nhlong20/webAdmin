@@ -44,7 +44,7 @@
                         <%= order.products[id].qty %>
                     </td>
                     <td class="align-middle">
-                        <%= (order.products[id].item.price*order.products[id].qty.toLocaleString()) %> VNĐ
+                        <%= (order.products[id].item.price*order.products[id].qty).toLocaleString() %> VNĐ
                     </td>
                 </tr>
                 <% } %>

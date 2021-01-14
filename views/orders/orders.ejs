@@ -55,6 +55,9 @@
                     </td>
                     <td class="align-middle text-center">
                         <a class="btn btn-primary" style="color:#fff;" href="/orders/details/<%=order._id%>">Chi tiết</a>
+                        <a class="btn btn-success <%if(order.status!=1){%> disabled <%}%>" style="color:#fff;" href="/orders/delivered/<%=order._id%>">Đã giao hàng</a>
+                        <a class="btn btn-danger <%if(order.status!=1){%> disabled <%}%>" style="color:#fff;"
+                            href="/orders/canceled/<%=order._id%>">Hủy đơn hàng</a>
                     </td>
                 </tr>
                 <%}) }else{%>

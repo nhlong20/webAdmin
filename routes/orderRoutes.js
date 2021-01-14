@@ -5,5 +5,7 @@ const orderController = require("../controllers/orderController");
 
 router.get("/", isLoggedIn, orderController.getAllOrders);
 router.get("/details/:id", isLoggedIn, orderController.showOrderDetails);
+router.get("/delivered/:id", isLoggedIn, orderController.delivered);
+router.get("/canceled/:id", isLoggedIn, orderController.canceled);
 
 module.exports = router;

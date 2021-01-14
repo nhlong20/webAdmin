@@ -12,3 +12,14 @@ module.exports.listOrder = async (query, options) => {
     const paginate = await Order.paginate(query, options);
     return paginate;
 };
+
+module.exports.changeOrderStatusById = async (uid, status) => {
+    return await Order.findByIdAndUpdate(
+        { _id: uid },
+        { status: status },
+        (err) => {
+            if (err) throw err;
+            console.log("Update user locked status successfully");
+        }
+    );
+};
