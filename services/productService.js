@@ -8,3 +8,5 @@ module.exports.listProduct = async (query, options) => {
 module.exports.getAllProducts = async () => {
     return await Product.find({});
 };
+
+module

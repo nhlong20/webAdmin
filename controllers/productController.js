@@ -46,7 +46,7 @@ function serializeQuery(query) {
             key != "color" &&
             key != "category" &&
             key != "page" &&
-            key != 'sort'
+            key != "sort"
         ) {
             str.push(
                 encodeURIComponent(key) + "=" + encodeURIComponent(query[key])
@@ -55,7 +55,7 @@ function serializeQuery(query) {
     return str.join("&");
 }
 
-exports.getProducts = async(req, res) => {
+exports.getProducts = async (req, res) => {
     const { color, sort, brand } = req.query;
     const query = {};
     const options = {
@@ -76,80 +76,107 @@ exports.getProducts = async(req, res) => {
     renderView(res, paginate, custom);
 };
 
-exports.editProduct = async(req, res) => {
+exports.editProduct = async (req, res) => {
     var id = req.params.id;
     const product = await Product.findById(id);
     res.render("./products/edit-product", { product });
 };
 
-exports.insertProduct = async(req, res) => {
+exports.insertProduct = async (req, res) => {
     const form = new formidable.IncomingForm();
     form.uploadDir = path.join(__dirname, "/../uploads");
+    form.multiples = true;
     form.keepExtensions = true;
     form.maxFieldsSize = 10 * 1024 * 1024; //10MB
-    form.parse(req, async(err, fields, files) => {
+    form.parse(req, async (err, fields, files) => {
         if (err) {
             return;
         }
-        const uploadedPath = files.images.path;
-        const uploadedRes = await cloudinary.uploader.upload(uploadedPath);
+
         const product = fields;
+        let images = [];
+        if (files.images != null) {
+            for (const file of files.images) {
+                const uploadedPath = file.path;
+                const uploadedRes = await cloudinary.uploader.upload(
+                    uploadedPath
+                );
+                images.push(uploadedRes.secure_url);
+                fs.unlink(uploadedPath, function (err) {
+                    if (err) throw err;
+                    console.log("File deleted!");
+                });
+            }
+        }
+
+        product.images = images;
         product.color.toUpperCase();
-        product.coverImage = uploadedRes.secure_url;
+        product.coverImage = product.images[0];
+
         await Product.create(product);
 
-        fs.unlink(uploadedPath, function(err) {
-            if (err) throw err;
-            console.log("File deleted!");
-        });
         console.log("Uploaded product successfully");
         res.redirect("/products");
     });
 };
 
-exports.updateProduct = async(req, res) => {
+exports.updateProduct = async (req, res) => {
     const form = new formidable.IncomingForm();
-
+    form.uploadDir = path.join(__dirname, "/../uploads");
+    form.multiples = true;
     form.keepExtensions = true;
     form.maxFieldsSize = 10 * 1024 * 1024; //10MB
-    form.parse(req, async(err, fields, files) => {
-
-        console.log(fields);
+    form.parse(req, async (err, fields, files) => {
         if (err) {
             return;
         }
+
         const update = fields;
+        let images = [];
+        if (files.images.size != 0) {
+            for (const file of files.images) {
+                const uploadedPath = file.path;
+                const uploadedRes = await cloudinary.uploader.upload(
+                    uploadedPath
+                );
+                images.push(uploadedRes.secure_url);
+                fs.unlink(uploadedPath, function (err) {
+                    if (err) throw err;
+                    console.log("File deleted!");
+                });
+            }
+        }
 
-        if (fields.images != null) {
-            form.uploadDir = path.join(__dirname, "/../uploads");
-            const uploadedPath = files.images.path;
-            const uploadedRes = await cloudinary.uploader.upload(uploadedPath);
-            update.coverImage = uploadedRes.secure_url;
-        };
+        const currentProperties = await Product.findById(update._id);
 
-        console.log(update._id);
-        await Product.findOneAndUpdate({ _id: update._id },
+        if (images.length != 0) {
+            update.images = images;
+        } else {
+            update.images = currentProperties.images;
+        }
+
+        update.color.toUpperCase();
+        update.coverImage = update.images[0];
+
+        await Product.findOneAndUpdate(
+            { _id: update._id },
             update,
-            //     (err, result) => {
-            //         if (err) throw err;
-            //         console.log("Updated product: " + update._id);
-            //     }
+            (err, result) => {
+                if (err) throw err;
+                console.log("Updated product: " + update._id);
+            }
         );
 
-        // fs.unlink(uploadedPath, function(err) {
-        //     if (err) throw err;
-        //     console.log("File deleted!");
-        // });
         res.redirect("/products");
     });
 };
 
-exports.deleteProduct = async(req, res) => {
+exports.deleteProduct = async (req, res) => {
     await Product.findOneAndDelete({ _id: req.params.id });
     res.redirect("/");
 };
 
-exports.searchProducts = async(req, res) => {
+exports.searchProducts = async (req, res) => {
     const search = req.query.search;
     const options = {
         page: req.query.page * 1 || 1,
