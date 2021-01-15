@@ -82,7 +82,7 @@ function getRevenueStatisticsFromStartDate(timeUnit, allOrders) {
     return { timeUnit, revenue, productList, chartData };
 }
 
-exports.dashboard = async (req, res) => {
+exports.dashboard = async(req, res) => {
     const unit = req.query.unit || "today";
 
     const allProducts = await productService.getAllProducts();

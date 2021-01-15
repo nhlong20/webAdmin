@@ -37,6 +37,7 @@ function renderView(res, paginate, custom) {
 function toUpperOnlyFirstChar(word) {
     return word[0].toUpperCase() + word.substr(1).toLowerCase();
 }
+
 function serializeQuery(query) {
     let str = [];
     for (let key in query)
@@ -54,7 +55,7 @@ function serializeQuery(query) {
     return str.join("&");
 }
 
-exports.getProducts = async (req, res) => {
+exports.getProducts = async(req, res) => {
     const { color, sort, brand } = req.query;
     const query = {};
     const options = {
@@ -75,18 +76,18 @@ exports.getProducts = async (req, res) => {
     renderView(res, paginate, custom);
 };
 
-exports.editProduct = async (req, res) => {
+exports.editProduct = async(req, res) => {
     var id = req.params.id;
     const product = await Product.findById(id);
     res.render("./products/edit-product", { product });
 };
 
-exports.insertProduct = async (req, res) => {
+exports.insertProduct = async(req, res) => {
     const form = new formidable.IncomingForm();
     form.uploadDir = path.join(__dirname, "/../uploads");
     form.keepExtensions = true;
     form.maxFieldsSize = 10 * 1024 * 1024; //10MB
-    form.parse(req, async (err, fields, files) => {
+    form.parse(req, async(err, fields, files) => {
         if (err) {
             return;
         }
@@ -97,7 +98,7 @@ exports.insertProduct = async (req, res) => {
         product.coverImage = uploadedRes.secure_url;
         await Product.create(product);
 
-        fs.unlink(uploadedPath, function (err) {
+        fs.unlink(uploadedPath, function(err) {
             if (err) throw err;
             console.log("File deleted!");
         });
@@ -106,42 +107,49 @@ exports.insertProduct = async (req, res) => {
     });
 };
 
-exports.updateProduct = async (req, res) => {
+exports.updateProduct = async(req, res) => {
     const form = new formidable.IncomingForm();
-    form.uploadDir = path.join(__dirname, "/../uploads");
+
     form.keepExtensions = true;
     form.maxFieldsSize = 10 * 1024 * 1024; //10MB
-    form.parse(req, async (err, fields, files) => {
+    form.parse(req, async(err, fields, files) => {
+
+        console.log(fields);
         if (err) {
             return;
         }
-        const uploadedPath = files.images.path;
-        const uploadedRes = await cloudinary.uploader.upload(uploadedPath);
         const update = fields;
-        update.coverImage = uploadedRes.secure_url;
-        await Product.findOneAndUpdate(
-            { _id: update._id },
+
+        if (fields.images != null) {
+            form.uploadDir = path.join(__dirname, "/../uploads");
+            const uploadedPath = files.images.path;
+            const uploadedRes = await cloudinary.uploader.upload(uploadedPath);
+            update.coverImage = uploadedRes.secure_url;
+        };
+
+        console.log(update._id);
+        await Product.findOneAndUpdate({ _id: update._id },
             update,
-            (err, result) => {
-                if (err) throw err;
-                console.log("Updated product: " + update._id);
-            }
+            //     (err, result) => {
+            //         if (err) throw err;
+            //         console.log("Updated product: " + update._id);
+            //     }
         );
 
-        fs.unlink(uploadedPath, function (err) {
-            if (err) throw err;
-            console.log("File deleted!");
-        });
+        // fs.unlink(uploadedPath, function(err) {
+        //     if (err) throw err;
+        //     console.log("File deleted!");
+        // });
         res.redirect("/products");
     });
 };
 
-exports.deleteProduct = async (req, res) => {
+exports.deleteProduct = async(req, res) => {
     await Product.findOneAndDelete({ _id: req.params.id });
     res.redirect("/");
 };
 
-exports.searchProducts = async (req, res) => {
+exports.searchProducts = async(req, res) => {
     const search = req.query.search;
     const options = {
         page: req.query.page * 1 || 1,
